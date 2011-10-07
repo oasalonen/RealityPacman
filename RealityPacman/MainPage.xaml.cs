@@ -26,6 +26,7 @@ namespace RealityPacman
             InitializeComponent();
 
             _engine = new GameEngine();
+            _engine.ghostCreated += new GameEngine.GhostCreated(ghostCreated);
             _engine.Start();
             //_engine.Player.Position = new GeoCoordinate(0, 0);
 
@@ -36,6 +37,14 @@ namespace RealityPacman
             watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
 
             watcher.Start();
+        }
+
+        void ghostCreated(Ghost ghost)
+        {
+            GhostControl ghostControl = new GhostControl();
+            ghostControl.DataContext = ghost;
+
+            positionLayer.AddChild(ghostControl, ghost.Position);
         }
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)

@@ -9,10 +9,11 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Device.Location;
+using System.ComponentModel;
 
 namespace RealityPacman
 {
-    public class Ghost
+    public class Ghost : INotifyPropertyChanged
     {
         enum CoarseHeading
         {
@@ -25,7 +26,19 @@ namespace RealityPacman
         const double LatitudeSpeed = 0.000005;
         const double LongitudeSpeed = 0.000005;
 
-        public GeoCoordinate Position { get; set; }
+        private GeoCoordinate _position;
+        public GeoCoordinate Position
+        {
+            get { return _position; }
+            set
+            {
+                if (_position != value)
+                {
+                    _position = value;
+                    NotifyPropertyChanged("Position");
+                }
+            }
+        }
         CoarseHeading _heading;
         Random _random;
 
@@ -109,11 +122,23 @@ namespace RealityPacman
                 case CoarseHeading.Longitude:
                     diff = userPosition.Latitude - Position.Latitude;
                     Position.Latitude += Math.Sign(diff) * LatitudeSpeed;
+                    NotifyPropertyChanged("Position");
                     break;
                 case CoarseHeading.Latitude:
                     diff = userPosition.Longitude - Position.Longitude;
                     Position.Longitude += Math.Sign(diff) * LongitudeSpeed;
+                    NotifyPropertyChanged("Position");
                     break;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

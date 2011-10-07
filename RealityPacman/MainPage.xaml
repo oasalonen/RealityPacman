@@ -28,7 +28,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <my:Map HorizontalAlignment="Stretch" Name="map" VerticalAlignment="Stretch" ZoomLevel="19">
+            <my:Map HorizontalAlignment="Stretch" Name="map" VerticalAlignment="Stretch" ZoomLevel="15">
                 <my:MapLayer x:Name="positionLayer">
                     <Rectangle x:Name="rect" 
                                Width="20" 

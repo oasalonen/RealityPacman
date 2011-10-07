@@ -32,6 +32,10 @@ namespace RealityPacman
         Random _random;
         DateTime _startTime;
 
+        public delegate void GhostCreated(Ghost ghost);
+
+        public GhostCreated ghostCreated;
+
         public GameEngine()
         {
             _gameTimer = new DispatcherTimer();
@@ -139,6 +143,11 @@ namespace RealityPacman
 
             Ghost newGhost = new Ghost(ghostPosition);
             Ghosts.Add(newGhost);
+
+            if (ghostCreated != null)
+            {
+                ghostCreated(newGhost);
+            }
         }
 
         double CoordinateWithinBounds(double coordinate, double max, double min)
