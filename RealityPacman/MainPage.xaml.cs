@@ -50,7 +50,15 @@ namespace RealityPacman
 
         void ghostsMoved()
         {
-            map.UpdateLayout();
+            for (int i = positionLayer.Children.Count - 1; i > 0; i--)
+            {
+                GhostControl child = positionLayer.Children.ElementAt(i) as GhostControl;
+                if (child != null)
+                {
+                    positionLayer.Children.Remove(child);
+                }
+                positionLayer.AddChild(child, (child.DataContext as Ghost).Position);
+            }
         }
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)

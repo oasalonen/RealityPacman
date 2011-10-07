@@ -14,16 +14,21 @@ namespace RealityPacman
 {
     public class Player
     {
+        private string _name; 
         public GeoCoordinate Position { get; set; }
         public String Name {
             get {
-                if (Name == null) {
+                if (_name == null)
+                {
                     return "Anonymous";
                 } else {
-                    return Name;
+                    return _name;
                 }
             }
-            set;
+            set
+            {
+                _name = value;
+            }
         }
     }
 }
