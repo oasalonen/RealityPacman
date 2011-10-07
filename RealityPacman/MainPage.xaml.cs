@@ -51,6 +51,7 @@ namespace RealityPacman
 
         void ghostsMoved()
         {
+            // Kludge for the problem that ghosts don't update their position
             for (int i = positionLayer.Children.Count - 1; i > 0; i--)
             {
                 GhostControl child = positionLayer.Children.ElementAt(i) as GhostControl;
