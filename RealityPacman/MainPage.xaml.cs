@@ -39,6 +39,7 @@ namespace RealityPacman
             watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
 
             watcher.Start();
+            rect.Visibility = Visibility.Collapsed;
         }
 
         void ghostCreated(Ghost ghost)
@@ -99,6 +100,7 @@ namespace RealityPacman
                 rect.turn(angle);
             }
             lastPlayerPosition = e.Position.Location;
+            rect.Visibility = Visibility.Visible;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
