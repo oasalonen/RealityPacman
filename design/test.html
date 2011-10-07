@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="lib/jquery-1.6.4.min.js"></script>
+    <style type="text/css">
+
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #ghost {
+            background: url("images/ghost_anim_12.png");
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            left: 200px;
+            top: 200px;
+            margin-left: -32px;
+            margin-top: -32px;
+        }
+
+        #eye-blacks {
+            background: url("images/ghost_anim_14.png");
+            position: absolute;
+            width: 64px;
+            height: 64px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="ghost">
+        <div id="eye-blacks"></div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(function () {
+            var delta = 1, index = 0, NUM_IMAGES = 10,
+                mouseX, mouseY;
+            setInterval(function () {
+                $("#ghost").css("background", "url(\"images/ghost_anim_"+(index<9?"0":"")+(index+1)+".png\")")
+                index += delta;
+                if (index < 0 || index >= NUM_IMAGES) {
+                    delta = -delta;
+                    index += delta*2;
+                }
+
+
+
+                var offset = $("#ghost").offset();
+                var dX = mouseX - offset.left - $("#ghost").width()/2.0;
+                var dY = mouseY - offset.top - $("#ghost").height()/2.0;
+
+                dX = Math.max(-1.0, Math.min(1.0, dX/200));
+                dY = Math.max(-1.0, Math.min(1.0, dY/200));
+
+                $("#eye-blacks")
+                        .css("left", dX*3)
+                        .css("top", dY*4);
+                $("#ghost")
+                        .css("left", 32 + offset.left + dX*4.0)
+                        .css("top", 32 + offset.top + dY*4.0);
+
+            }, 1000/24);
+
+            $(window).mousemove(function (e) {
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+            });
+        });
+
+    </script>
+</body>
+</html>
