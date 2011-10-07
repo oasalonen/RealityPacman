@@ -1,0 +1,40 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IRouteService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="BasicHttpBinding_IRouteService1" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+            <customBinding>
+                <binding name="CustomBinding_IRouteService">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+                <binding name="CustomBinding_IRouteService1">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+            </customBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/routeservice/routeservice.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IRouteService"
+                contract="RoutingAPI.IRouteService" name="BasicHttpBinding_IRouteService" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/routeservice/routeservice.svc/binaryHttp"
+                binding="customBinding" bindingConfiguration="CustomBinding_IRouteService"
+                contract="RoutingAPI.IRouteService" name="CustomBinding_IRouteService" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/routeservice/routeservice.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IRouteService1"
+                contract="Routing.IRouteService" name="BasicHttpBinding_IRouteService1" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/routeservice/routeservice.svc/binaryHttp"
+                binding="customBinding" bindingConfiguration="CustomBinding_IRouteService1"
+                contract="Routing.IRouteService" name="CustomBinding_IRouteService1" />
+        </client>
+    </system.serviceModel>
+</configuration>

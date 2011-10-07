@@ -28,7 +28,11 @@ namespace RealityPacman
         public List<Ghost> Ghosts;
 
         DispatcherTimer _gameTimer;
-        const int _tickInterval = 500; // Engine ticks every 500 ms
+        const int _tickInterval = 250; // Engine ticks every 250 ms
+        const double GhostSpawnMaxLatDiff = 0.001;
+        const double GhostSpawnMinLatDiff = 0.0005;
+        const double GhostSpawnMaxLonDiff = 0.001;
+        const double GhostSpawnMinLonDiff = 0.0005;
         Random _random;
         DateTime _startTime;
 
@@ -72,9 +76,15 @@ namespace RealityPacman
             foreach (Ghost g in Ghosts)
             {
                 g.Process(Player.Position);
-                System.Diagnostics.Debug.WriteLine("Ghost pos: " + i++ +
-                                                   " lat: " + g.Position.Latitude +
-                                                   " lon: " + g.Position.Longitude);
+                //System.Diagnostics.Debug.WriteLine("Ghost pos: " + i++ +
+                                                   //" lat: " + g.Position.Latitude +
+                                                   //" lon: " + g.Position.Longitude);
+                System.Diagnostics.Debug.WriteLine("Ghost " + i++ + " distance: " + g.Position.GetDistanceTo(Player.Position));
+                // Check for collision
+                if (g.Position.GetDistanceTo(Player.Position) < 10)
+                {
+                    System.Diagnostics.Debug.WriteLine("You were eaten by ghost " + i + "!");
+                }
             }
         }
 
@@ -138,8 +148,8 @@ namespace RealityPacman
         {
             // Randomize location at X meters from player
             GeoCoordinate ghostPosition = new GeoCoordinate();
-            ghostPosition.Latitude = CoordinateWithinBounds(Player.Position.Latitude, 0.001, 0.0005);
-            ghostPosition.Longitude = CoordinateWithinBounds(Player.Position.Longitude, 0.001, 0.0005);
+            ghostPosition.Latitude = CoordinateWithinBounds(Player.Position.Latitude, GhostSpawnMaxLatDiff, GhostSpawnMinLatDiff);
+            ghostPosition.Longitude = CoordinateWithinBounds(Player.Position.Longitude, GhostSpawnMaxLonDiff, GhostSpawnMinLonDiff);
 
             Ghost newGhost = new Ghost(ghostPosition);
             Ghosts.Add(newGhost);
