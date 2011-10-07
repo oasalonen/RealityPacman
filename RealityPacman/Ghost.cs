@@ -22,8 +22,8 @@ namespace RealityPacman
         }
 
         const double Epsilon = 0.000001;
-        const double LatitudeSpeed = 0.000005;
-        const double LongitudeSpeed = 0.000005;
+        const double LatitudeSpeed = 0.000008;
+        const double LongitudeSpeed = 0.000008;
 
         public GeoCoordinate Position { get; set; }
         CoarseHeading _heading;
