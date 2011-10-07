@@ -37,8 +37,10 @@ namespace RealityPacman
         DateTime _startTime;
 
         public delegate void GhostCreated(Ghost ghost);
+        public delegate void GhostsMoved();
 
         public GhostCreated ghostCreated;
+        public GhostsMoved ghostsMoved;
 
         public GameEngine()
         {
@@ -85,6 +87,11 @@ namespace RealityPacman
                 {
                     System.Diagnostics.Debug.WriteLine("You were eaten by ghost " + i + "!");
                 }
+            }
+
+            if (ghostsMoved != null)
+            {
+                ghostsMoved();
             }
         }
 

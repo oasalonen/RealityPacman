@@ -10,11 +10,14 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="64" d:DesignWidth="64">
     
-    <Canvas x:Name="LayoutRoot" Width="64" Height="64">
+    <Canvas x:Name="LayoutRoot" Width="64" Height="64" my:MapLayer.Position="{Binding Position}">
         <Canvas.Clip>
             <RectangleGeometry Rect="0,0,64,64"/>
         </Canvas.Clip>
         <Image x:Name="sprite" Source="/RealityPacman;component/ghost_anim_row-01.png" />        
-        <Image x:Name="eyes" Source="/RealityPacman;component/eyes.png" />
+        <Image x:Name="eyes" Source="/RealityPacman;component/eyes.png" 
+               Canvas.Left="{Binding EyeX}"
+               Canvas.Top="{Binding EyeY}"
+               />
     </Canvas>
 </UserControl>
