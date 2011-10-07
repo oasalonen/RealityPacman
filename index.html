@@ -14,7 +14,7 @@
             height: 100%;
         }
         #ghost {
-            background: url("design/images/ghost_anim_12.png");
+            background: url("design/ghost_anim-01.png");
             position: absolute;
             width: 64px;
             height: 64px;
@@ -25,7 +25,7 @@
         }
 
         #eye-blacks {
-            background: url("design/images/ghost_anim_14.png");
+            background: url("design/ghost_anim-01.png") -128px -64px;
             position: absolute;
             width: 64px;
             height: 64px;
@@ -43,31 +43,41 @@
 
         $(function () {
             var delta = 1, index = 0, NUM_IMAGES = 10,
-                mouseX, mouseY;
-            setInterval(function () {
-                $("#ghost").css("background", "url(\"design/images/ghost_anim_"+(index<9?"0":"")+(index+1)+".png\")")
+                mouseX, mouseY,
+                posX = $(window).width()/2,
+                posY = $(window).height()/2;
+
+            function updateSprite() {
+                $("#ghost").css("background-position", "" + ~~(-index*64) + "px 0");
                 index += delta;
                 if (index < 0 || index >= NUM_IMAGES) {
                     delta = -delta;
                     index += delta*2;
                 }
+            }
 
-
-
+            function updatePosition() {
                 var offset = $("#ghost").offset();
-                var dX = mouseX - offset.left - $("#ghost").width()/2.0;
-                var dY = mouseY - offset.top - $("#ghost").height()/2.0;
+                var dX = mouseX - posX - $("#ghost").width()/2.0;
+                var dY = mouseY - posY - $("#ghost").height()/2.0;
 
                 dX = Math.max(-1.0, Math.min(1.0, dX/200));
                 dY = Math.max(-1.0, Math.min(1.0, dY/200));
 
+                posX += dX*4.0;
+                posY += dY*4.0;
+
                 $("#eye-blacks")
-                        .css("left", dX*3.0)
+                        .css("left", dX*4.0)
                         .css("top", dY*4.0);
                 $("#ghost")
-                        .css("left", 32 + offset.left + dX*4.0)
-                        .css("top", 32 + offset.top + dY*4.0);
+                        .css("left", 32 + posX)
+                        .css("top", 32 + posY);
+            }
 
+            setInterval(function () {
+                updateSprite();
+                updatePosition();
             }, 1000/24);
 
             $(window)
