@@ -17,9 +17,13 @@ namespace RealityPacman
         enum CoarseHeading
         {
             InvalidHeading,
-            Vertical,
-            Horizontal
+            Latitude,
+            Longitude
         }
+
+        const double Epsilon = 0.000001;
+        const double LatitudeSpeed = 0.000005;
+        const double LongitudeSpeed = 0.000005;
 
         public GeoCoordinate Position { get; set; }
         CoarseHeading _heading;
@@ -41,10 +45,11 @@ namespace RealityPacman
                 return;
             }
 
-            MaybeSwitchDirection();
+            MaybeSwitchDirection(userPosition);
+            Move(userPosition);
         }
 
-        void MaybeSwitchDirection()
+        void MaybeSwitchDirection(GeoCoordinate userPosition)
         {
             int rnd;
             switch (_heading)
@@ -55,29 +60,59 @@ namespace RealityPacman
                     rnd = _random.Next(2);
                     if (rnd == 0)
                     {
-                        _heading = CoarseHeading.Horizontal;
+                        _heading = CoarseHeading.Longitude;
                     }
                     else
                     {
-                        _heading = CoarseHeading.Vertical;
+                        _heading = CoarseHeading.Latitude;
                     }
                     break;
-                case CoarseHeading.Vertical:
-                case CoarseHeading.Horizontal:
-                    // Maybe change direction
-                    // Likelihood of changing direction is 2%
-                    rnd = _random.Next(100);
-                    if (rnd < 2)
+                case CoarseHeading.Latitude:
+                case CoarseHeading.Longitude:
+                    // Check if there only exists one direction to the user
+                    if (Math.Abs(userPosition.Latitude - Position.Latitude) < Epsilon)
                     {
-                        if (_heading == CoarseHeading.Horizontal)
+                        _heading = CoarseHeading.Longitude;
+                    }
+                    else if (Math.Abs(userPosition.Longitude - Position.Longitude) < Epsilon)
+                    {
+                        _heading = CoarseHeading.Latitude;
+                    }
+                    else
+                    {
+                        // Two possible directions, maybe change direction
+                        // Likelihood of changing direction is 2%
+                        rnd = _random.Next(100);
+                        if (rnd < 2)
                         {
-                            _heading = CoarseHeading.Vertical;
-                        }
-                        else
-                        {
-                            _heading = CoarseHeading.Horizontal;
+                            if (_heading == CoarseHeading.Longitude)
+                            {
+                                _heading = CoarseHeading.Latitude;
+                            }
+                            else
+                            {
+                                _heading = CoarseHeading.Longitude;
+                            }
                         }
                     }
+                    break;
+            }
+        }
+
+        void Move(GeoCoordinate userPosition)
+        {
+            System.Diagnostics.Debug.Assert(_heading != CoarseHeading.InvalidHeading);
+
+            double diff;
+            switch (_heading)
+            {
+                case CoarseHeading.Longitude:
+                    diff = userPosition.Latitude - Position.Latitude;
+                    Position.Latitude += Math.Sign(diff) * LatitudeSpeed;
+                    break;
+                case CoarseHeading.Latitude:
+                    diff = userPosition.Longitude - Position.Longitude;
+                    Position.Longitude += Math.Sign(diff) * LongitudeSpeed;
                     break;
             }
         }
