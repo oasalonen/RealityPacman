@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Collections.Generic;
 
 namespace RealityPacman
 {
@@ -24,6 +25,8 @@ namespace RealityPacman
         DispatcherTimer _gameTimer;
         const int _tickInterval = 500; // Engine ticks every 500 ms
         public GameDifficulty Difficulty { get; set; }
+        public Player Player;
+        public List<Ghost> Ghosts;
 
         public GameEngine()
         {
@@ -44,7 +47,18 @@ namespace RealityPacman
 
         public void _gameTimer_Tick(Object sender, EventArgs e)
         {
+            GenerateGhosts();
+
             // Process each ghost
+            foreach (Ghost g in Ghosts)
+            {
+                g.Process(Player.Position);
+            }
+        }
+
+        void GenerateGhosts()
+        {
+            // Checks whether it is necessary to generate additional ghosts, and does so
         }
     }
 }
