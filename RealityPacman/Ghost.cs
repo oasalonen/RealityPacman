@@ -26,7 +26,7 @@ namespace RealityPacman
             Longitude
         }
 
-        const double Epsilon = 0.000016;
+        const double Epsilon = 5.0;
         public const double DefaultSpeed = 0.000008;
 
         double LatitudeSpeed = DefaultSpeed;
@@ -157,11 +157,13 @@ namespace RealityPacman
                 case CoarseHeading.Latitude:
                 case CoarseHeading.Longitude:
                     // Check if there only exists one direction to the user
-                    if (Math.Abs(userPosition.Latitude - Position.Latitude) < Epsilon)
+                    GeoCoordinate userLatitude = new GeoCoordinate(userPosition.Latitude, Position.Longitude);
+                    GeoCoordinate userLongitude = new GeoCoordinate(Position.Latitude, userPosition.Longitude);
+                    if (userLatitude.GetDistanceTo(Position) < Epsilon)
                     {
                         _heading = CoarseHeading.Longitude;
                     }
-                    else if (Math.Abs(userPosition.Longitude - Position.Longitude) < Epsilon)
+                    else if (userLongitude.GetDistanceTo(Position) < Epsilon)
                     {
                         _heading = CoarseHeading.Latitude;
                     }
@@ -193,12 +195,12 @@ namespace RealityPacman
             double diff;
             switch (_heading)
             {
-                case CoarseHeading.Longitude:
+                case CoarseHeading.Latitude:
                     diff = userPosition.Latitude - Position.Latitude;
                     Position.Latitude += Math.Sign(diff) * LatitudeSpeed;
                     NotifyPropertyChanged("Position");
                     break;
-                case CoarseHeading.Latitude:
+                case CoarseHeading.Longitude:
                     diff = userPosition.Longitude - Position.Longitude;
                     Position.Longitude += Math.Sign(diff) * LongitudeSpeed;
                     NotifyPropertyChanged("Position");
