@@ -29,6 +29,11 @@ namespace RealityPacman
             animTimer.Start();
         }
 
+        public void turn(double angle)
+        {
+            pacmanRotation.Angle = angle * 180 / Math.PI;
+        }
+
         void animTimer_Tick(object sender, EventArgs e)
         {
             // First and last frame of sprite have white background, skip those frames

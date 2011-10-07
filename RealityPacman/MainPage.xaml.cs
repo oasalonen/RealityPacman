@@ -85,11 +85,20 @@ namespace RealityPacman
             // TODO: care about status
         }
 
+        GeoCoordinate lastPlayerPosition=null;
+
         void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
             MapLayer.SetPosition(rect, e.Position.Location);
             map.Center = e.Position.Location;
             _engine.Player.Position = e.Position.Location;
+
+            if (lastPlayerPosition != null)
+            {
+                double angle = Math.Atan2( lastPlayerPosition.Latitude -e.Position.Location.Latitude, e.Position.Location.Longitude - lastPlayerPosition.Longitude);
+                rect.turn(angle);
+            }
+            lastPlayerPosition = e.Position.Location;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
