@@ -1,3 +1,4 @@
 *.cache
 */obj/Debug/*
 */Bin/*
+*.user
