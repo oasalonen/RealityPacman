@@ -4,7 +4,6 @@
 <head>
     <title></title>
 
-    <script type="text/javascript" src="design/lib/jquery-1.6.4.min.js"></script>
     <style type="text/css">
 
         body {
@@ -22,6 +21,7 @@
             top: 200px;
             margin-left: -32px;
             margin-top: -32px;
+            pointer-events: none;
         }
 
         #eye-blacks {
@@ -32,20 +32,19 @@
         }
 
     </style>
-</head>
-<body>
 
-    <div id="ghost">
-        <div id="eye-blacks"></div>
-    </div>
-
+    <script type="text/javascript" src="design/lib/jquery-1.6.4.min.js"></script>
     <script type="text/javascript">
 
         $(function () {
             var delta = 1, index = 0, NUM_IMAGES = 10,
-                mouseX, mouseY,
-                posX = $(window).width()/2,
-                posY = $(window).height()/2;
+                windowWidth = $(window).width(),
+                windowHeight = $(window).height(),
+                posX = windowWidth/2,
+                posY = windowHeight/2,
+                mouseX = posX, mouseY = posY,
+                ghostEl = document.getElementById("ghost"),
+                eyesEl = document.getElementById("eye-blacks");
 
             function updateSprite() {
                 $("#ghost").css("background-position", "" + ~~(-index*64) + "px 0");
@@ -57,9 +56,8 @@
             }
 
             function updatePosition() {
-                var offset = $("#ghost").offset();
-                var dX = mouseX - posX - $("#ghost").width()/2.0;
-                var dY = mouseY - posY - $("#ghost").height()/2.0;
+                var dX = mouseX - posX - 32.0;
+                var dY = mouseY - posY - 32.0;
 
                 dX = Math.max(-1.0, Math.min(1.0, dX/200));
                 dY = Math.max(-1.0, Math.min(1.0, dY/200));
@@ -67,10 +65,10 @@
                 posX += dX*4.0;
                 posY += dY*4.0;
 
-                $("#eye-blacks")
+                $(eyesEl)
                         .css("left", dX*4.0)
                         .css("top", dY*4.0);
-                $("#ghost")
+                $(ghostEl)
                         .css("left", 32 + posX)
                         .css("top", 32 + posY);
             }
@@ -86,11 +84,23 @@
                         mouseY = e.pageY;
                     })
                     .mouseleave(function () {
-                        mouseX = $(window).width()/2.0;
-                        mouseY = $(window).height()/2.0;
+                        mouseX = windowWidth/2.0;
+                        mouseY = windowHeight/2.0;
+                    })
+                    .resize(function () {
+                        windowWidth = $(window).width();
+                        windowHeight = $(window).height();
                     });
         });
 
     </script>
+
+</head>
+<body>
+
+    <div id="ghost">
+        <div id="eye-blacks"></div>
+    </div>
+
 </body>
 </html>
