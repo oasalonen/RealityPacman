@@ -27,6 +27,7 @@ namespace RealityPacman
 
             _engine = new GameEngine();
             _engine.ghostCreated += new GameEngine.GhostCreated(ghostCreated);
+            _engine.gameOver += new GameEngine.GameOver(gameOver);
             _engine.ghostsMoved += new GameEngine.GhostsMoved(ghostsMoved);
             _engine.Start();
             //_engine.Player.Position = new GeoCoordinate(0, 0);
@@ -59,6 +60,23 @@ namespace RealityPacman
                 }
                 positionLayer.AddChild(child, (child.DataContext as Ghost).Position);
             }
+        }
+
+        void gameOver()
+        {
+            TimeSpan duration = _engine.GameDuration();
+            String durationString = "You lasted ";
+            if (duration.Hours >= 1.0)
+            {
+                durationString += (int)duration.Hours + " h " + (int)duration.Minutes + " min ";
+            }
+            else if (duration.Minutes >= 1.0)
+            {
+                durationString += (int)duration.Minutes + " min ";
+            }
+            durationString += (int)duration.Seconds + " s.";
+            MessageBox.Show("Game over! " + durationString);
+            NavigationService.GoBack();
         }
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
