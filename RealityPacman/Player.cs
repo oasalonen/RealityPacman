@@ -15,5 +15,15 @@ namespace RealityPacman
     public class Player
     {
         public GeoCoordinate Position { get; set; }
+        public String Name {
+            get {
+                if (Name == null) {
+                    return "Anonymous";
+                } else {
+                    return Name;
+                }
+            }
+            set;
+        }
     }
 }
