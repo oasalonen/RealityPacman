@@ -15,5 +15,8 @@
             <RectangleGeometry Rect="0,0,64,64"/>
         </Canvas.Clip>
         <Image x:Name="sprite" Source="/RealityPacman;component/man_anim_row-01.png" />
+        <Canvas.RenderTransform>
+            <RotateTransform x:Name="pacmanRotation" CenterX="32" CenterY="32" />
+        </Canvas.RenderTransform>
     </Canvas>
 </UserControl>

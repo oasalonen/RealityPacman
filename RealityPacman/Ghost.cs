@@ -110,7 +110,7 @@ namespace RealityPacman
                 if (oldDiff < 0.00005) _wayPoints.RemoveAt(0);
             }
 
-            EyeAngle = Math.Atan2(Position.Latitude - userPosition.Latitude, Position.Longitude - userPosition.Longitude);
+            EyeAngle = Math.Atan2(Position.Latitude - userPosition.Latitude, userPosition.Longitude - Position.Longitude);
             System.Diagnostics.Debug.WriteLine("Angle: " + (EyeAngle * 180 / Math.PI) + " x: " + EyeX + " y: " + EyeY);
         }
 
