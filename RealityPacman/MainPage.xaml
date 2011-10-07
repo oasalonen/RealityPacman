@@ -28,20 +28,17 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <my:Map HorizontalAlignment="Stretch" Name="map" VerticalAlignment="Stretch" />
+            <my:Map HorizontalAlignment="Stretch" Name="map" VerticalAlignment="Stretch" ZoomLevel="19">
+                <my:MapLayer x:Name="positionLayer">
+                    <Rectangle x:Name="rect" 
+                               Width="20" 
+                               Height="20" 
+                               RadiusX="10" 
+                               RadiusY="10"
+                               Fill="Yellow"
+                               />
+                </my:MapLayer>
+            </my:Map>
         </Grid>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-
 </phone:PhoneApplicationPage>

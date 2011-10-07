@@ -14,7 +14,7 @@ namespace RealityPacman
 {
     public class GameEngine
     {
-        enum GameDifficulty
+        public enum GameDifficulty
         {
             Easy,
             Medium,
