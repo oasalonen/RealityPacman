@@ -73,6 +73,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PacMan.xaml.cs">
+      <DependentUpon>PacMan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\Routing\Reference.cs">
@@ -94,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PacMan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,6 +126,7 @@
     <None Include="Service References\Routing\service.xsd" />
     <Resource Include="ghost_anim_row-01.png" />
     <Resource Include="eyes.png" />
+    <Resource Include="man_anim_row-01.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
