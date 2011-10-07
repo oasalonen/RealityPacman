@@ -16,7 +16,7 @@ namespace RealityPacman
 {
     public class GameEngine
     {
-        enum GameDifficulty
+        public enum GameDifficulty
         {
             Easy,
             Medium,
@@ -56,7 +56,7 @@ namespace RealityPacman
 
         public void _gameTimer_Tick(Object sender, EventArgs e)
         {
-            if (Player.Position.IsUnknown)
+            if (Player.Position == null || Player.Position.IsUnknown)
             {
                 return;
             }

@@ -18,6 +18,7 @@ namespace RealityPacman
     public partial class MainPage : PhoneApplicationPage
     {
         GameEngine _engine;
+        private GeoCoordinateWatcher watcher;
 
         // Constructor
         public MainPage()
@@ -27,6 +28,25 @@ namespace RealityPacman
             _engine = new GameEngine();
             _engine.Start();
             //_engine.Player.Position = new GeoCoordinate(0, 0);
+
+            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            watcher.MovementThreshold = 20;
+
+            watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
+            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
+
+            watcher.Start();
+        }
+
+        void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        {
+            // TODO: care about status
+        }
+
+        void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            MapLayer.SetPosition(rect, e.Position.Location);
+            map.Center = e.Position.Location;
         }
     }
 }
