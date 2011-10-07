@@ -35,10 +35,13 @@ namespace RealityPacman
         const double GhostSpawnMinLonDiff = 0.0005;
         Random _random;
         DateTime _startTime;
+        DateTime _endTime;
 
         public delegate void GhostCreated(Ghost ghost);
+        public delegate void GameOver();
 
         public GhostCreated ghostCreated;
+        public GameOver gameOver;
 
         public GameEngine()
         {
@@ -49,17 +52,22 @@ namespace RealityPacman
             _random = new Random();
             Player = new Player();
             Ghosts = new List<Ghost>();
+
+            _endTime = new DateTime(0);
+            _startTime = new DateTime(0);
         }
 
         public void Start()
         {
             _gameTimer.Start();
             _startTime = DateTime.Now;
+            _endTime = new DateTime(0);
         }
 
         public void Stop()
         {
             _gameTimer.Stop();
+            _endTime = DateTime.Now;
         }
 
         public void _gameTimer_Tick(Object sender, EventArgs e)
@@ -84,6 +92,11 @@ namespace RealityPacman
                 if (g.Position.GetDistanceTo(Player.Position) < 10)
                 {
                     System.Diagnostics.Debug.WriteLine("You were eaten by ghost " + i + "!");
+                    if (gameOver != null)
+                    {
+                        Stop();
+                        gameOver();
+                    }
                 }
             }
         }
@@ -139,9 +152,16 @@ namespace RealityPacman
             }
         }
 
-        TimeSpan GameDuration()
+        public TimeSpan GameDuration()
         {
-            return _startTime - DateTime.Now;
+            if (_startTime > _endTime)
+            {
+                return _startTime - DateTime.Now;
+            }
+            else
+            {
+                return _endTime - _startTime;
+            }
         }
 
         void AddNewGhost()
