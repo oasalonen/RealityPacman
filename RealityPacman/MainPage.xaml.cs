@@ -49,5 +49,11 @@ namespace RealityPacman
             map.Center = e.Position.Location;
             _engine.Player.Position = e.Position.Location;
         }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _engine.Player.Name = NavigationContext.QueryString["playerName"];
+        } 
     }
 }
