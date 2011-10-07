@@ -3,13 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="64" d:DesignWidth="64">
-    
-    <Canvas x:Name="LayoutRoot">
+
+    <Canvas x:Name="LayoutRoot" my:MapLayer.PositionOrigin="Center">
         <Canvas.Clip>
             <RectangleGeometry Rect="0,0,64,64"/>
         </Canvas.Clip>
