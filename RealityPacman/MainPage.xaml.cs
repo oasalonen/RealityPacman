@@ -47,6 +47,7 @@ namespace RealityPacman
         {
             MapLayer.SetPosition(rect, e.Position.Location);
             map.Center = e.Position.Location;
+            _engine.Player.Position = e.Position.Location;
         }
     }
 }
