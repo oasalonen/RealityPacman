@@ -9,6 +9,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Device.Location;
+using RealityPacman.Routing;
+using System.Collections.ObjectModel;
+using Microsoft.Phone.Controls.Maps;
+using Microsoft.Phone.Controls.Maps.Platform;
 
 namespace RealityPacman
 {
@@ -25,6 +29,10 @@ namespace RealityPacman
         const double LatitudeSpeed = 0.000008;
         const double LongitudeSpeed = 0.000008;
 
+        private ObservableCollection<Location> _wayPoints;
+
+        private Waypoint StartPosition = new Waypoint();
+
         public GeoCoordinate Position { get; set; }
         CoarseHeading _heading;
         Random _random;
@@ -32,6 +40,7 @@ namespace RealityPacman
         public Ghost(GeoCoordinate position)
         {
             Position = position;
+            StartPosition.Location = position;
             _heading = CoarseHeading.InvalidHeading;
             _random = new Random();
         }
@@ -44,9 +53,38 @@ namespace RealityPacman
                 System.Diagnostics.Debug.WriteLine("Warning: Cannot move ghost, user or ghost position is unknown.");
                 return;
             }
+            if (_wayPoints == null || _wayPoints.Count == 0)
+            {
+                MaybeSwitchDirection(userPosition);
+                Move(userPosition);
+            }
+            else
+            {
+                double oldDiff = MoveToLastWayPoint(_wayPoints[0]);
+                if (oldDiff < 0.00005) _wayPoints.RemoveAt(0);
+            }
+        }
 
-            MaybeSwitchDirection(userPosition);
-            Move(userPosition);
+        private void CalculateRouting(GeoCoordinate userPosition)
+        {
+            Waypoint endPosition = new Waypoint();
+            endPosition.Location = userPosition;
+
+            var routeRequest = new RouteRequest();
+
+            routeRequest.Credentials = new Credentials();
+            routeRequest.Credentials.ApplicationId = "Al9X2Bk2UP07iOZG9N_pt4yGUWpLHcyGmG5EjiRSZDFi4EJn6AnF6MxtGfehDJZi";
+            routeRequest.Waypoints = new System.Collections.ObjectModel.ObservableCollection<Waypoint>();
+            routeRequest.Waypoints.Add(StartPosition);
+            routeRequest.Waypoints.Add(endPosition);
+            routeRequest.Options = new RouteOptions();
+            routeRequest.Options.RoutePathType = RoutePathType.Points;
+            routeRequest.UserProfile = new UserProfile();
+            routeRequest.UserProfile.DistanceUnit = DistanceUnit.Kilometer;
+
+            var routeClient = new RouteServiceClient("BasicHttpBinding_IRouteService");
+            routeClient.CalculateRouteCompleted += new EventHandler<CalculateRouteCompletedEventArgs>(routeClient_CalculateRouteCompleted);
+            routeClient.CalculateRouteAsync(routeRequest);
         }
 
         void MaybeSwitchDirection(GeoCoordinate userPosition)
@@ -115,6 +153,20 @@ namespace RealityPacman
                     Position.Longitude += Math.Sign(diff) * LongitudeSpeed;
                     break;
             }
+        }
+
+        private double MoveToLastWayPoint(Location location)
+        {
+            double diff;
+            diff = location.Latitude - Position.Latitude;
+            Position.Latitude += Math.Sign(diff) * LatitudeSpeed;
+            return diff;
+        }
+
+        void routeClient_CalculateRouteCompleted(object sender, CalculateRouteCompletedEventArgs e)
+        {
+            _wayPoints = e.Result.Result.RoutePath.Points;
+
         }
     }
 }
