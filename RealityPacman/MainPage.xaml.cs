@@ -96,6 +96,20 @@ namespace RealityPacman
         {
             base.OnNavigatedTo(e);
             _engine.Player.Name = NavigationContext.QueryString["playerName"];
+
+            int difficulty = Int32.Parse(NavigationContext.QueryString["difficulty"]);
+            switch (difficulty)
+            {
+                case 0:
+                    _engine.Difficulty = GameEngine.GameDifficulty.Easy;
+                    break;
+                case 1:
+                    _engine.Difficulty = GameEngine.GameDifficulty.Medium;
+                    break;
+                case 2:
+                    _engine.Difficulty = GameEngine.GameDifficulty.Hard;
+                    break;
+            }
         } 
     }
 }

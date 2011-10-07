@@ -31,6 +31,10 @@
                 <TextBlock x:Name="PlayerNameLabel" Text="Enter your name here:" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <TextBox x:Name="PlayerNameField" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
                 <TextBlock x:Name="InstructionText" Text="Lorem ipsum" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock x:Name="DifficultyText" Margin="10,30,0,0" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <RadioButton Content="Easy" Height="71" x:Name="easyButton" GroupName="difficulty" IsChecked="True" />
+                <RadioButton Content="Medium" Height="71" x:Name="mediumButton" GroupName="difficulty" />
+                <RadioButton Content="Hard" Height="71" x:Name="hardButton" GroupName="difficulty" />
             </StackPanel>
             <Button x:Name="StartButton" VerticalAlignment="Bottom" Content="Start playing!" Click="StartButton_Click" />
         </Grid>

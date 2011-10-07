@@ -23,7 +23,7 @@ namespace RealityPacman
             Hard
         }
 
-        //public GameDifficulty Difficulty { get; set; }
+        public GameDifficulty Difficulty { get; set; }
         public Player Player;
         public List<Ghost> Ghosts;
 
@@ -179,6 +179,19 @@ namespace RealityPacman
             ghostPosition.Longitude = CoordinateWithinBounds(Player.Position.Longitude, GhostSpawnMaxLonDiff, GhostSpawnMinLonDiff);
 
             Ghost newGhost = new Ghost(ghostPosition);
+            switch (Difficulty)
+            {
+                case GameDifficulty.Easy:
+                    newGhost.SetSpeed(Ghost.DefaultSpeed);
+                    break;
+                case GameDifficulty.Medium:
+                    newGhost.SetSpeed(Ghost.DefaultSpeed * 1.5);
+                    break;
+                case GameDifficulty.Hard:
+                    newGhost.SetSpeed(Ghost.DefaultSpeed * 2.0);
+                    break;
+            }
+
             Ghosts.Add(newGhost);
 
             if (ghostCreated != null)

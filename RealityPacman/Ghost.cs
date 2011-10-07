@@ -26,9 +26,11 @@ namespace RealityPacman
             Longitude
         }
 
-        const double Epsilon = 0.000001;
-        const double LatitudeSpeed = 0.000008;
-        const double LongitudeSpeed = 0.000008;
+        const double Epsilon = 0.000016;
+        public const double DefaultSpeed = 0.000008;
+
+        double LatitudeSpeed = DefaultSpeed;
+        double LongitudeSpeed = DefaultSpeed;
 
         private ObservableCollection<Location> _wayPoints;
 
@@ -226,6 +228,12 @@ namespace RealityPacman
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public void SetSpeed(double speed)
+        {
+            LatitudeSpeed = speed;
+            LongitudeSpeed = speed;
         }
     }
 }
