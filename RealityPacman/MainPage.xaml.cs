@@ -76,7 +76,7 @@ namespace RealityPacman
                 durationString += (int)duration.Minutes + " min ";
             }
             durationString += (int)duration.Seconds + " s.";
-            MessageBox.Show("Game over! " + durationString);
+            MessageBox.Show("Game over, " + _engine.Player.Name + "! " + durationString);
             NavigationService.GoBack();
         }
 

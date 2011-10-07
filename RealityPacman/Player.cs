@@ -20,7 +20,7 @@ namespace RealityPacman
         {
             get
             {
-                if (_name == null)
+                if (String.IsNullOrEmpty(_name))
                 {
                     return "Anonymous";
                 }

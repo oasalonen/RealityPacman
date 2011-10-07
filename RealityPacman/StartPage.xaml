@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage 
+﻿<phone:PhoneApplicationPage xmlns:my="clr-namespace:RealityPacman"  
     x:Class="RealityPacman.StartPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -24,13 +24,20 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="PageTitle" Text="Reality Pacman" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
+        
+        <Canvas Grid.Row="1">
+            <my:GhostControl Canvas.Left="20" />
+            <my:GhostControl Canvas.Left="80" />
+            <my:GhostControl Canvas.Left="140" />
+            <my:PacMan x:Name="Pacman" Canvas.Left="320" />
+        </Canvas>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,70,12,0">
             <StackPanel>
-                <TextBlock x:Name="PlayerNameLabel" Text="Enter your name here:" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock x:Name="PlayerNameLabel" Text="Enter your name (optional):" VerticalAlignment="Top" Style="{StaticResource PhoneTextLargeStyle}"/>
                 <TextBox x:Name="PlayerNameField" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                <TextBlock x:Name="InstructionText" Text="Lorem ipsum" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock x:Name="InstructionText" TextWrapping="Wrap" Text="Escape the ghosts by moving your legs! Yep, you read correctly. Please watch out for cars." VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <TextBlock x:Name="DifficultyText" Margin="10,30,0,0" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <RadioButton Content="Easy" Height="71" x:Name="easyButton" GroupName="difficulty" IsChecked="True" />
                 <RadioButton Content="Medium" Height="71" x:Name="mediumButton" GroupName="difficulty" />
