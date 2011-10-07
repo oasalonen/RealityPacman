@@ -67,6 +67,9 @@
     </Compile>
     <Compile Include="GameEngine.cs" />
     <Compile Include="Ghost.cs" />
+    <Compile Include="GhostControl.xaml.cs">
+      <DependentUpon>GhostControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="GhostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +117,8 @@
     <None Include="Service References\Routing\route.wsdl" />
     <None Include="Service References\Routing\route.xsd" />
     <None Include="Service References\Routing\service.xsd" />
+    <Resource Include="ghost_anim_row-01.png" />
+    <Resource Include="eyes.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +128,7 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="ghost_anim_12.png" />
     <None Include="Service References\Routing\configuration91.svcinfo" />
     <None Include="Service References\Routing\configuration.svcinfo" />
     <None Include="Service References\Routing\Reference.svcmap">
