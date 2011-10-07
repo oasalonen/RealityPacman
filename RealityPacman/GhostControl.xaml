@@ -8,9 +8,13 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    d:DesignHeight="64" d:DesignWidth="64">
     
-    <Grid x:Name="LayoutRoot">
-        <Image Source="/RealityPacman;component/ghost_anim_12.png" Width="40" Height="40" />
-    </Grid>
+    <Canvas x:Name="LayoutRoot" Width="64" Height="64">
+        <Canvas.Clip>
+            <RectangleGeometry Rect="0,0,64,64"/>
+        </Canvas.Clip>
+        <Image x:Name="sprite" Source="/RealityPacman;component/ghost_anim_row-01.png" />        
+        <Image x:Name="eyes" Source="/RealityPacman;component/eyes.png" />
+    </Canvas>
 </UserControl>

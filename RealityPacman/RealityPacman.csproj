@@ -110,6 +110,8 @@
     <None Include="Service References\Routing\route.wsdl" />
     <None Include="Service References\Routing\route.xsd" />
     <None Include="Service References\Routing\service.xsd" />
+    <Resource Include="ghost_anim_row-01.png" />
+    <Resource Include="eyes.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
