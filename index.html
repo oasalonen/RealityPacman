@@ -4,7 +4,7 @@
 <head>
     <title></title>
 
-    <script type="text/javascript" src="lib/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="design/lib/jquery-1.6.4.min.js"></script>
     <style type="text/css">
 
         body {
@@ -14,7 +14,7 @@
             height: 100%;
         }
         #ghost {
-            background: url("images/ghost_anim_12.png");
+            background: url("design/images/ghost_anim_12.png");
             position: absolute;
             width: 64px;
             height: 64px;
@@ -25,7 +25,7 @@
         }
 
         #eye-blacks {
-            background: url("images/ghost_anim_14.png");
+            background: url("design/images/ghost_anim_14.png");
             position: absolute;
             width: 64px;
             height: 64px;
@@ -45,7 +45,7 @@
             var delta = 1, index = 0, NUM_IMAGES = 10,
                 mouseX, mouseY;
             setInterval(function () {
-                $("#ghost").css("background", "url(\"images/ghost_anim_"+(index<9?"0":"")+(index+1)+".png\")")
+                $("#ghost").css("background", "url(\"design/images/ghost_anim_"+(index<9?"0":"")+(index+1)+".png\")")
                 index += delta;
                 if (index < 0 || index >= NUM_IMAGES) {
                     delta = -delta;
@@ -62,18 +62,23 @@
                 dY = Math.max(-1.0, Math.min(1.0, dY/200));
 
                 $("#eye-blacks")
-                        .css("left", dX*3)
-                        .css("top", dY*4);
+                        .css("left", dX*3.0)
+                        .css("top", dY*4.0);
                 $("#ghost")
                         .css("left", 32 + offset.left + dX*4.0)
                         .css("top", 32 + offset.top + dY*4.0);
 
             }, 1000/24);
 
-            $(window).mousemove(function (e) {
-                mouseX = e.pageX;
-                mouseY = e.pageY;
-            });
+            $(window)
+                    .mousemove(function (e) {
+                        mouseX = e.pageX;
+                        mouseY = e.pageY;
+                    })
+                    .mouseleave(function () {
+                        mouseX = $(window).width()/2.0;
+                        mouseY = $(window).height()/2.0;
+                    });
         });
 
     </script>
