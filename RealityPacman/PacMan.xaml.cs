@@ -31,6 +31,7 @@ namespace RealityPacman
 
         void animTimer_Tick(object sender, EventArgs e)
         {
+            // First and last frame of sprite have white background, skip those frames
             frame = frame + delta;
             if (frame == 9)
                 delta = -1;
