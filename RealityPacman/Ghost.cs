@@ -50,6 +50,37 @@ namespace RealityPacman
         CoarseHeading _heading;
         Random _random;
 
+        private double _eyeAngle;
+        public double EyeAngle
+        {
+            get { return _eyeAngle; }
+            set
+            {
+                if (_eyeAngle != value)
+                {
+                    _eyeAngle = value;
+                    NotifyPropertyChanged("EyeAngle");
+                    NotifyPropertyChanged("EyeX");
+                    NotifyPropertyChanged("EyeY");
+                }
+            }
+        }
+
+        public double EyeX
+        {
+            get {
+                return 4 * Math.Cos(EyeAngle);
+            }
+        }
+
+        public double EyeY
+        {
+            get
+            {
+                return 4 * Math.Sin(EyeAngle);
+            }
+        }
+
         public Ghost(GeoCoordinate position)
         {
             Position = position;
@@ -76,6 +107,9 @@ namespace RealityPacman
                 double oldDiff = MoveToLastWayPoint(_wayPoints[0]);
                 if (oldDiff < 0.00005) _wayPoints.RemoveAt(0);
             }
+
+            EyeAngle = Math.Atan2(Position.Latitude - userPosition.Latitude, Position.Longitude - userPosition.Longitude);
+            System.Diagnostics.Debug.WriteLine("Angle: " + (EyeAngle * 180 / Math.PI) + " x: " + EyeX + " y: " + EyeY);
         }
 
         private void CalculateRouting(GeoCoordinate userPosition)

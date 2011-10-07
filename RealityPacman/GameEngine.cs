@@ -39,9 +39,11 @@ namespace RealityPacman
 
         public delegate void GhostCreated(Ghost ghost);
         public delegate void GameOver();
+        public delegate void GhostsMoved();
 
         public GhostCreated ghostCreated;
         public GameOver gameOver;
+        public GhostsMoved ghostsMoved;
 
         public GameEngine()
         {
@@ -98,6 +100,11 @@ namespace RealityPacman
                         gameOver();
                     }
                 }
+            }
+
+            if (ghostsMoved != null)
+            {
+                ghostsMoved();
             }
         }
 
