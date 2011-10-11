@@ -33,7 +33,7 @@ namespace RealityPacman
             //_engine.Player.Position = new GeoCoordinate(0, 0);
 
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
-            watcher.MovementThreshold = 20;
+            watcher.MovementThreshold = 5;
 
             watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
             watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
