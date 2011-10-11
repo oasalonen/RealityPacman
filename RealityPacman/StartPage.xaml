@@ -26,15 +26,15 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0">
                         <!--
                         <TextBlock x:Name="PlayerNameLabel" Text="Enter your name (optional):" VerticalAlignment="Top" Style="{StaticResource PhoneTextLargeStyle}"/>
                         <TextBox x:Name="PlayerNameField" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                        <TextBlock x:Name="InstructionText" TextWrapping="Wrap" Text="Escape the ghosts by moving your legs! Yep, you read correctly. Please watch out for cars." VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>-->
-                        <TextBlock x:Name="DifficultyText" Margin="10,30,0,0" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
-                        <Grid>
+                        -->
+                        <TextBlock Grid.Row="0" x:Name="DifficultyText" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"/>
                                 <RowDefinition Height="100"/>
@@ -44,14 +44,13 @@
                             <RadioButton Content="I feel like jogging" Grid.Row="1" x:Name="mediumButton" GroupName="difficulty" />
                             <RadioButton Content="Parkour on ROIDS!!!" Grid.Row="2" x:Name="hardButton" GroupName="difficulty" />
                         </Grid>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+                    <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                         <Button x:Name="StartButton" Content="Start!" Click="StartButton_Click" />
                     </StackPanel>
                 </Grid>
             </controls:PanoramaItem>
 
-            <controls:PanoramaItem Header="high scores">
+            <!--<controls:PanoramaItem Header="high scores">
                 <ListBox>
                 </ListBox>
             </controls:PanoramaItem>
@@ -59,11 +58,12 @@
             <controls:PanoramaItem Header="settings">
                 <ListBox>
                 </ListBox>
-            </controls:PanoramaItem>
+            </controls:PanoramaItem>-->
 
-            <controls:PanoramaItem Header="help">
-                <ListBox>
-                </ListBox>
+            <controls:PanoramaItem Header="instructions">
+                <TextBlock x:Name="InstructionText" TextWrapping="Wrap" 
+                           Text="" 
+                           VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
             </controls:PanoramaItem>
         </controls:Panorama>
 

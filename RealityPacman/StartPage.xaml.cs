@@ -18,6 +18,9 @@ namespace RealityPacman
         public StartPage()
         {
             InitializeComponent();
+
+            InstructionText.Text = "Escape the ghosts on the map by moving your legs. Yes, you need to go outside to play this game." +
+                "\r\n\r\nMind your surroundings while playing. Cars heading your way are not indicated on the map!";
         }
 
         private void StartButton_TextInput(object sender, TextCompositionEventArgs e)
