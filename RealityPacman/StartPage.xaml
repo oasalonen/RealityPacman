@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -12,39 +13,61 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <!--Panorama control-->
+        <controls:Panorama Title="Reality Pacman" x:Name="Panorama">
+            <!--<controls:Panorama.Background>
+                <ImageBrush ImageSource="PanoramaBackground.png"/>
+            </controls:Panorama.Background>-->
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="PageTitle" Text="Reality Pacman" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-        
-        <Canvas Grid.Row="1">
-            <my:GhostControl Canvas.Left="20" />
-            <my:GhostControl Canvas.Left="80" />
-            <my:GhostControl Canvas.Left="140" />
-            <my:PacMan x:Name="Pacman" Canvas.Left="320" />
-        </Canvas>
+            <controls:PanoramaItem Header="new game">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <!--
+                        <TextBlock x:Name="PlayerNameLabel" Text="Enter your name (optional):" VerticalAlignment="Top" Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBox x:Name="PlayerNameField" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                        <TextBlock x:Name="InstructionText" TextWrapping="Wrap" Text="Escape the ghosts by moving your legs! Yep, you read correctly. Please watch out for cars." VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>-->
+                        <TextBlock x:Name="DifficultyText" Margin="10,30,0,0" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Content="Taking grandma out for a stroll" Grid.Row="0" x:Name="easyButton" GroupName="difficulty" IsChecked="True" />
+                            <RadioButton Content="I feel like jogging" Grid.Row="1" x:Name="mediumButton" GroupName="difficulty" />
+                            <RadioButton Content="Parkour on ROIDS!!!" Grid.Row="2" x:Name="hardButton" GroupName="difficulty" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+                        <Button x:Name="StartButton" Content="Start!" Click="StartButton_Click" />
+                    </StackPanel>
+                </Grid>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="high scores">
+                <ListBox>
+                </ListBox>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="settings">
+                <ListBox>
+                </ListBox>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="help">
+                <ListBox>
+                </ListBox>
+            </controls:PanoramaItem>
+        </controls:Panorama>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,70,12,0">
-            <StackPanel>
-                <TextBlock x:Name="PlayerNameLabel" Text="Enter your name (optional):" VerticalAlignment="Top" Style="{StaticResource PhoneTextLargeStyle}"/>
-                <TextBox x:Name="PlayerNameField" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                <TextBlock x:Name="InstructionText" TextWrapping="Wrap" Text="Escape the ghosts by moving your legs! Yep, you read correctly. Please watch out for cars." VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
-                <TextBlock x:Name="DifficultyText" Margin="10,30,0,0" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
-                <RadioButton Content="Easy" Height="71" x:Name="easyButton" GroupName="difficulty" IsChecked="True" />
-                <RadioButton Content="Medium" Height="71" x:Name="mediumButton" GroupName="difficulty" />
-                <RadioButton Content="Hard" Height="71" x:Name="hardButton" GroupName="difficulty" />
-            </StackPanel>
-            <Button x:Name="StartButton" VerticalAlignment="Bottom" Content="Start playing!" Click="StartButton_Click" />
-        </Grid>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

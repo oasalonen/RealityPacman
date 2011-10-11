@@ -37,7 +37,7 @@ namespace RealityPacman
                 difficulty = 2;
             }
 
-            NavigationService.Navigate(new Uri("/MainPage.xaml?playerName=" + PlayerNameField.Text +
+            NavigationService.Navigate(new Uri("/MainPage.xaml?playerName=" + "" +
                                                "&difficulty=" + difficulty, UriKind.Relative));
         }
     }
