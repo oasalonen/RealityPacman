@@ -12,6 +12,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using RealityPacman.Models;
+using RealityPacman.ViewModels;
+
 
 namespace RealityPacman
 {
@@ -22,6 +25,12 @@ namespace RealityPacman
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
+
+        private static SessionViewModel _viewModel;
+        public static SessionViewModel ViewModel
+        {
+            get { return _viewModel; }
+        }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -57,6 +66,23 @@ namespace RealityPacman
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            string dbConnectionString = "Data Source=isostore:/RealityPacman.sdf";
+            using (SessionDataContext db = new SessionDataContext(dbConnectionString))
+            {
+                if (!db.DatabaseExists())
+                {
+                    db.CreateDatabase();
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Int64 longI = i;
+                        db.Sessions.InsertOnSubmit(new Session { Duration = 1000000000 * longI, Difficulty = i % 3 });
+                    }
+                    db.SubmitChanges();
+                }
+            }
+
+            _viewModel = new SessionViewModel(dbConnectionString);
+            _viewModel.Load();
         }
 
         // Code to execute when the application is launching (eg, from Start)

@@ -33,16 +33,29 @@
                         <TextBlock x:Name="PlayerNameLabel" Text="Enter your name (optional):" VerticalAlignment="Top" Style="{StaticResource PhoneTextLargeStyle}"/>
                         <TextBox x:Name="PlayerNameField" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
                         -->
-                        <TextBlock Grid.Row="0" x:Name="DifficultyText" Text="Difficulty" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Row="0" x:Name="DifficultyText" Text="Choose your poison:" VerticalAlignment="Top" Style="{StaticResource PhoneTextNormalStyle}"/>
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"/>
                                 <RowDefinition Height="100"/>
                                 <RowDefinition Height="100"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Content="Taking grandma out for a stroll" Grid.Row="0" x:Name="easyButton" GroupName="difficulty" IsChecked="True" />
-                            <RadioButton Content="I feel like jogging" Grid.Row="1" x:Name="mediumButton" GroupName="difficulty" />
-                            <RadioButton Content="Parkour on ROIDS!!!" Grid.Row="2" x:Name="hardButton" GroupName="difficulty" />
+                            <RadioButton Content="Taking grandma out for a stroll" 
+                                         Grid.Row="0" 
+                                         x:Name="easyButton" 
+                                         GroupName="difficulty" 
+                                         IsChecked="True" 
+                                         Checked="easyButton_Checked"/>
+                            <RadioButton Content="I feel like jogging" 
+                                         Grid.Row="1" 
+                                         x:Name="mediumButton" 
+                                         GroupName="difficulty" 
+                                         Checked="mediumButton_Checked"/>
+                            <RadioButton Content="Parkour on ROIDS!!!" 
+                                         Grid.Row="2" 
+                                         x:Name="hardButton" 
+                                         GroupName="difficulty" 
+                                         Checked="hardButton_Checked"/>
                         </Grid>
                     <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                         <Button x:Name="StartButton" Content="Start!" Click="StartButton_Click" />
@@ -50,12 +63,29 @@
                 </Grid>
             </controls:PanoramaItem>
 
-            <!--<controls:PanoramaItem Header="high scores">
-                <ListBox>
-                </ListBox>
+            <controls:PanoramaItem Header="my scores" x:Name="ScoresPanoramaItem">
+                <controls:PanoramaItem.Resources>
+                    <my:DurationFormatter x:Name="durationFormatter" />
+                    <DataTemplate x:Key="ScoresListItemTemplate">
+                        <TextBlock Text="{Binding Duration, Converter={StaticResource durationFormatter}}"
+                                   Margin="20,0,0,0"/>
+                    </DataTemplate>
+                </controls:PanoramaItem.Resources>
+
+                <StackPanel>
+                    <TextBlock Text="(easy)"
+                               x:Name="ScoresDifficultyLabel"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                               Margin="10,0,0,0"/>
+                    <ListBox x:Name="ScoresList" 
+                             ItemsSource="{Binding EasySessions}" 
+                             ItemTemplate="{StaticResource ScoresListItemTemplate}"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Top"/>
+                </StackPanel>
             </controls:PanoramaItem>
 
-            <controls:PanoramaItem Header="settings">
+            <!--<controls:PanoramaItem Header="settings">
                 <ListBox>
                 </ListBox>
             </controls:PanoramaItem>-->
