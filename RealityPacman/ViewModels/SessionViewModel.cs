@@ -9,7 +9,7 @@ namespace RealityPacman.ViewModels
 {
     public class SessionViewModel : INotifyPropertyChanged
     {
-        private SessionDataContext sessionDb;
+        private DatabaseContext sessionDb;
 
         private ObservableCollection<Session> _sessions;
         public ObservableCollection<Session> Sessions
@@ -57,7 +57,7 @@ namespace RealityPacman.ViewModels
 
         public SessionViewModel(string dbConnectionString)
         {
-            sessionDb = new SessionDataContext(dbConnectionString);
+            sessionDb = new DatabaseContext(dbConnectionString);
         }
 
         public void Save()
@@ -100,7 +100,18 @@ namespace RealityPacman.ViewModels
             sessionDb.SubmitChanges();
             Sessions.Add(session);
 
-            // TODO: add to correct difficulty sessions
+            switch (session.Difficulty)
+            {
+                case 0:
+                    EasySessions.Add(session);
+                    break;
+                case 1:
+                    MediumSessions.Add(session);
+                    break;
+                case 2:
+                    HardSessions.Add(session);
+                    break;
+            }
         }
 
         #region INotifyProperyChanged

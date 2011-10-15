@@ -12,12 +12,13 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Maps;
 using System.Device.Location;
+using RealityPacman.Game;
 
 namespace RealityPacman
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        GameEngine _engine;
+        Engine _engine;
         private GeoCoordinateWatcher watcher;
 
         // Constructor
@@ -25,10 +26,10 @@ namespace RealityPacman
         {
             InitializeComponent();
 
-            _engine = new GameEngine();
-            _engine.ghostCreated += new GameEngine.GhostCreated(ghostCreated);
-            _engine.gameOver += new GameEngine.GameOver(gameOver);
-            _engine.ghostsMoved += new GameEngine.GhostsMoved(ghostsMoved);
+            _engine = new Engine();
+            _engine.ghostCreated += new Engine.GhostCreated(ghostCreated);
+            _engine.gameOver += new Engine.GameOver(gameOver);
+            _engine.ghostsMoved += new Engine.GhostsMoved(ghostsMoved);
             _engine.Start();
             //_engine.Player.Position = new GeoCoordinate(0, 0);
 
@@ -112,13 +113,13 @@ namespace RealityPacman
             switch (difficulty)
             {
                 case 0:
-                    _engine.Difficulty = GameEngine.GameDifficulty.Easy;
+                    _engine.Difficulty = Engine.GameDifficulty.Easy;
                     break;
                 case 1:
-                    _engine.Difficulty = GameEngine.GameDifficulty.Medium;
+                    _engine.Difficulty = Engine.GameDifficulty.Medium;
                     break;
                 case 2:
-                    _engine.Difficulty = GameEngine.GameDifficulty.Hard;
+                    _engine.Difficulty = Engine.GameDifficulty.Hard;
                     break;
             }
         } 

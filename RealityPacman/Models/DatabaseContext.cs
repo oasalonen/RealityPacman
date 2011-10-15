@@ -82,9 +82,9 @@ namespace RealityPacman.Models
         #endregion
     }
 
-    public class SessionDataContext : DataContext
+    public class DatabaseContext : DataContext
     {
-        public SessionDataContext(string connectionString) : base(connectionString) { }
+        public DatabaseContext(string connectionString) : base(connectionString) { }
 
         public Table<Session> Sessions;
     }

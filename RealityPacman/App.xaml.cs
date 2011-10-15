@@ -67,7 +67,7 @@ namespace RealityPacman
             }
 
             string dbConnectionString = "Data Source=isostore:/RealityPacman.sdf";
-            using (SessionDataContext db = new SessionDataContext(dbConnectionString))
+            using (DatabaseContext db = new DatabaseContext(dbConnectionString))
             {
                 if (!db.DatabaseExists())
                 {

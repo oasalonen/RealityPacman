@@ -15,7 +15,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Phone.Controls.Maps;
 using Microsoft.Phone.Controls.Maps.Platform;
 
-namespace RealityPacman
+namespace RealityPacman.Game
 {
     public class Ghost : INotifyPropertyChanged
     {

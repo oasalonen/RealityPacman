@@ -67,19 +67,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameEngine.cs" />
-    <Compile Include="Ghost.cs" />
+    <Compile Include="Game\Engine.cs" />
+    <Compile Include="Game\Ghost.cs" />
     <Compile Include="GhostControl.xaml.cs">
       <DependentUpon>GhostControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\SessionDataContext.cs" />
+    <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="PacMan.xaml.cs">
       <DependentUpon>PacMan.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Player.cs" />
+    <Compile Include="Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\Routing\Reference.cs">
       <AutoGen>True</AutoGen>

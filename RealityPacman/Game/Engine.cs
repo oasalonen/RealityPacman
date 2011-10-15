@@ -12,9 +12,9 @@ using System.Windows.Threading;
 using System.Collections.Generic;
 using System.Device.Location;
 
-namespace RealityPacman
+namespace RealityPacman.Game
 {
-    public class GameEngine
+    public class Engine
     {
         public enum GameDifficulty
         {
@@ -45,7 +45,7 @@ namespace RealityPacman
         public GameOver gameOver;
         public GhostsMoved ghostsMoved;
 
-        public GameEngine()
+        public Engine()
         {
             _gameTimer = new DispatcherTimer();
             _gameTimer.Interval = new TimeSpan(0, 0, 0, 0, _tickInterval);
