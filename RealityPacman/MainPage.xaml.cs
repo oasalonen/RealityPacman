@@ -107,21 +107,9 @@ namespace RealityPacman
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _engine.Player.Name = NavigationContext.QueryString["playerName"];
 
-            int difficulty = Int32.Parse(NavigationContext.QueryString["difficulty"]);
-            switch (difficulty)
-            {
-                case 0:
-                    _engine.Difficulty = Engine.GameDifficulty.Easy;
-                    break;
-                case 1:
-                    _engine.Difficulty = Engine.GameDifficulty.Medium;
-                    break;
-                case 2:
-                    _engine.Difficulty = Engine.GameDifficulty.Hard;
-                    break;
-            }
+            int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
+            _engine.Difficulty = (Difficulty) difficultyInt;
         } 
     }
 }

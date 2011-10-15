@@ -28,18 +28,21 @@ namespace RealityPacman
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            int difficulty = 0;
-            if (mediumButton.IsChecked.Value)
+            Game.Difficulty difficulty;
+            if (easyButton.IsChecked.Value)
             {
-                difficulty = 1;
+                difficulty = Game.Difficulty.Easy;
             }
-            else if (hardButton.IsChecked.Value)
+            else if (mediumButton.IsChecked.Value)
             {
-                difficulty = 2;
+                difficulty = Game.Difficulty.Medium;
+            }
+            else
+            {
+                difficulty = Game.Difficulty.Hard;
             }
 
-            NavigationService.Navigate(new Uri("/MainPage.xaml?playerName=" + "" +
-                                               "&difficulty=" + difficulty, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/MainPage.xaml?difficulty=" + (int)difficulty, UriKind.Relative));
         }
 
         private void easyButton_Checked(object sender, RoutedEventArgs e)

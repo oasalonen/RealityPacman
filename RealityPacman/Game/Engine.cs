@@ -16,15 +16,18 @@ namespace RealityPacman.Game
 {
     public class Engine
     {
-        public enum GameDifficulty
+        private DifficultySettings _difficulty;
+        public Difficulty Difficulty 
         {
-            Easy,
-            Medium,
-            Hard
+            get { return _difficulty.Level; }
+            set
+            {
+                _difficulty = new DifficultySettings(value);
+            }
         }
 
-        public GameDifficulty Difficulty { get; set; }
         public Player Player;
+
         public List<Ghost> Ghosts;
 
         DispatcherTimer _gameTimer;
@@ -50,6 +53,8 @@ namespace RealityPacman.Game
             _gameTimer = new DispatcherTimer();
             _gameTimer.Interval = new TimeSpan(0, 0, 0, 0, _tickInterval);
             _gameTimer.Tick += new EventHandler(_gameTimer_Tick);
+
+            Difficulty = Difficulty.Easy;
 
             _random = new Random();
             Player = new Player();
@@ -181,13 +186,13 @@ namespace RealityPacman.Game
             Ghost newGhost = new Ghost(ghostPosition);
             switch (Difficulty)
             {
-                case GameDifficulty.Easy:
+                case Difficulty.Easy:
                     newGhost.SetSpeed(Ghost.DefaultSpeed);
                     break;
-                case GameDifficulty.Medium:
+                case Difficulty.Medium:
                     newGhost.SetSpeed(Ghost.DefaultSpeed * 1.5);
                     break;
-                case GameDifficulty.Hard:
+                case Difficulty.Hard:
                     newGhost.SetSpeed(Ghost.DefaultSpeed * 2.0);
                     break;
             }

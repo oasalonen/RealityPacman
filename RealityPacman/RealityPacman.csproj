@@ -67,6 +67,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Game\Difficulty.cs" />
     <Compile Include="Game\Engine.cs" />
     <Compile Include="Game\Ghost.cs" />
     <Compile Include="GhostControl.xaml.cs">
