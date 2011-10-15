@@ -41,12 +41,14 @@ namespace RealityPacman.Game
         DateTime _endTime;
 
         public delegate void GhostCreated(Ghost ghost);
-        public delegate void GameOver();
         public delegate void GhostsMoved();
+        public delegate void GameStarted();
+        public delegate void GameOver();
 
         public GhostCreated ghostCreated;
-        public GameOver gameOver;
         public GhostsMoved ghostsMoved;
+        public GameStarted gameStarted;
+        public GameOver gameOver;
 
         public Engine()
         {

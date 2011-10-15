@@ -90,7 +90,11 @@ namespace RealityPacman
             TimeSpan duration = new TimeSpan((Int64) value);
 
             string durationString = "";
-            if (duration.Hours >= 1.0)
+            if (duration.Days >= 1.0)
+            {
+                durationString += (int)duration.Days + " d " + (int)duration.Hours + " h " + (int)duration.Minutes + " min ";
+            }
+            else if (duration.Hours >= 1.0)
             {
                 durationString += (int)duration.Hours + " h " + (int)duration.Minutes + " min ";
             }

@@ -28,8 +28,9 @@ namespace RealityPacman
 
             _engine = new Engine();
             _engine.ghostCreated += new Engine.GhostCreated(ghostCreated);
-            _engine.gameOver += new Engine.GameOver(gameOver);
             _engine.ghostsMoved += new Engine.GhostsMoved(ghostsMoved);
+            _engine.gameStarted += new Engine.GameStarted(gameStarted);
+            _engine.gameOver += new Engine.GameOver(gameOver);
             _engine.Start();
             //_engine.Player.Position = new GeoCoordinate(0, 0);
 
@@ -65,8 +66,15 @@ namespace RealityPacman
             }
         }
 
+        void gameStarted()
+        {
+            App.IsIdleModeEnabled = false;
+        }
+
         void gameOver()
         {
+            App.IsIdleModeEnabled = true;
+
             TimeSpan duration = _engine.GameDuration();
             String durationString = "You lasted ";
             if (duration.Hours >= 1.0)

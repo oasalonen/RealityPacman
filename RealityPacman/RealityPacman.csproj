@@ -70,6 +70,7 @@
     <Compile Include="Game\Difficulty.cs" />
     <Compile Include="Game\Engine.cs" />
     <Compile Include="Game\Ghost.cs" />
+    <Compile Include="Game\Session.cs" />
     <Compile Include="GhostControl.xaml.cs">
       <DependentUpon>GhostControl.xaml</DependentUpon>
     </Compile>

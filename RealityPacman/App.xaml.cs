@@ -32,6 +32,24 @@ namespace RealityPacman
             get { return _viewModel; }
         }
 
+        private static bool _isIdleModeEnabled;
+        public static bool IsIdleModeEnabled
+        {
+            get { return _isIdleModeEnabled; }
+            set
+            {
+                _isIdleModeEnabled = value;
+                if (_isIdleModeEnabled)
+                {
+                    PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Enabled;
+                }
+                else
+                {
+                    PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+                }
+            }
+        }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
