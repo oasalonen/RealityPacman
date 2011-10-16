@@ -59,12 +59,97 @@ namespace RealityPacman.Models
             }
         }
 
+        private DateTime _startTime;
+        [Column]
+        public DateTime StartTime
+        {
+            get { return _startTime; }
+            set
+            {
+                if (_startTime != value)
+                {
+                    NotifyPropertyChanging("StartTime");
+                    _startTime = value;
+                    NotifyPropertyChanged("StartTime");
+                }
+            }
+        }
+
+        private DateTime _endTime;
+        [Column]
+        public DateTime EndTime
+        {
+            get { return _endTime; }
+            set
+            {
+                if (_endTime != value)
+                {
+                    NotifyPropertyChanging("EndTime");
+                    _endTime = value;
+                    NotifyPropertyChanged("EndTime");
+                }
+            }
+        }
+
+        private double _startLatitude;
+        [Column]
+        public double StartLatitude
+        {
+            get { return _startLatitude; }
+            set
+            {
+                if (_startLatitude != value)
+                {
+                    NotifyPropertyChanging("StartLatitude");
+                    _startLatitude = value;
+                    NotifyPropertyChanged("StartLatitude");
+                }
+            }
+        }
+
+        private double _startLongitude;
+        [Column]
+        public double StartLongitude
+        {
+            get { return _startLongitude; }
+            set
+            {
+                if (_startLongitude != value)
+                {
+                    NotifyPropertyChanging("StartLongitude");
+                    _startLongitude = value;
+                    NotifyPropertyChanged("StartLongitude");
+                }
+            }
+        }
+
+        private double _startAltitude;
+        [Column]
+        public double StartAltitude
+        {
+            get { return _startAltitude; }
+            set
+            {
+                if (_startAltitude != value)
+                {
+                    NotifyPropertyChanging("StartAltitude");
+                    _startAltitude = value;
+                    NotifyPropertyChanged("StartAltitude");
+                }
+            }
+        }
+
         public SessionModel() { }
 
         public SessionModel(Game.Session session)
         {
             Difficulty = (int)session.Difficulty;
             Duration = (int)session.Duration.TotalMilliseconds;
+            StartTime = session.StartTime;
+            EndTime = session.EndTime;
+            StartLatitude = session.StartCoordinate.Latitude;
+            StartLongitude = session.StartCoordinate.Longitude;
+            StartAltitude = session.StartCoordinate.Altitude;
         }
 
         #region INotifyPropertyChanged, INotifyPropertyChanging
