@@ -26,6 +26,8 @@ namespace RealityPacman
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
+        public static AppSettings Settings { get; set; }
+
         private static SessionViewModel _viewModel;
         public static SessionViewModel ViewModel
         {
@@ -83,6 +85,8 @@ namespace RealityPacman
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+            Settings = new AppSettings();
 
             string dbConnectionString = "Data Source=isostore:/RealityPacman.sdf";
             using (DatabaseContext db = new DatabaseContext(dbConnectionString))

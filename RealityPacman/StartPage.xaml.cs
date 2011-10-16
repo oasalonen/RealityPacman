@@ -42,6 +42,7 @@ namespace RealityPacman
                 difficulty = Game.Difficulty.Hard;
             }
 
+            App.Settings.PreferredDifficulty = difficulty;
             NavigationService.Navigate(new Uri("/MainPage.xaml?difficulty=" + (int)difficulty, UriKind.Relative));
         }
 
@@ -81,6 +82,23 @@ namespace RealityPacman
                 ScoresList.SetBinding(ListBox.ItemsSourceProperty, b);
             }
         }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            switch (App.Settings.PreferredDifficulty)
+            {
+                case Game.Difficulty.Easy:
+                    easyButton.IsChecked = true;
+                    break;
+                case Game.Difficulty.Medium:
+                    mediumButton.IsChecked = true;
+                    break;
+                case Game.Difficulty.Hard:
+                    hardButton.IsChecked = true;
+                    break;
+            }
+            base.OnNavigatedTo(e);
+        }
     }
 
     public class DurationFormatter : IValueConverter
