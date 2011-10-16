@@ -11,8 +11,8 @@ namespace RealityPacman.ViewModels
     {
         private DatabaseContext sessionDb;
 
-        private ObservableCollection<Session> _sessions;
-        public ObservableCollection<Session> Sessions
+        private ObservableCollection<SessionModel> _sessions;
+        public ObservableCollection<SessionModel> Sessions
         {
             get { return _sessions; }
             set
@@ -22,8 +22,8 @@ namespace RealityPacman.ViewModels
             }
         }
 
-        private ObservableCollection<Session> _easySessions;
-        public ObservableCollection<Session> EasySessions
+        private ObservableCollection<SessionModel> _easySessions;
+        public ObservableCollection<SessionModel> EasySessions
         {
             get { return _easySessions; }
             set
@@ -33,8 +33,8 @@ namespace RealityPacman.ViewModels
             }
         }
 
-        private ObservableCollection<Session> _mediumSessions;
-        public ObservableCollection<Session> MediumSessions
+        private ObservableCollection<SessionModel> _mediumSessions;
+        public ObservableCollection<SessionModel> MediumSessions
         {
             get { return _mediumSessions; }
             set
@@ -44,8 +44,8 @@ namespace RealityPacman.ViewModels
             }
         }
 
-        private ObservableCollection<Session> _hardSessions;
-        public ObservableCollection<Session> HardSessions
+        private ObservableCollection<SessionModel> _hardSessions;
+        public ObservableCollection<SessionModel> HardSessions
         {
             get { return _hardSessions; }
             set
@@ -70,31 +70,31 @@ namespace RealityPacman.ViewModels
             var sessionQuery = from session in sessionDb.Sessions
                                orderby session.Duration descending
                                select session;
-            Sessions = new ObservableCollection<Session>(sessionQuery);
+            Sessions = new ObservableCollection<SessionModel>(sessionQuery);
 
             var easySessionQuery = from session in sessionDb.Sessions
                                    orderby session.Duration descending
                                    where session.Difficulty == 0
                                    select session;
 
-            EasySessions = new ObservableCollection<Session>(easySessionQuery);
+            EasySessions = new ObservableCollection<SessionModel>(easySessionQuery);
 
             var mediumSessionQuery = from session in sessionDb.Sessions
                                      orderby session.Duration descending
                                      where session.Difficulty == 1
                                      select session;
 
-            MediumSessions = new ObservableCollection<Session>(mediumSessionQuery);
+            MediumSessions = new ObservableCollection<SessionModel>(mediumSessionQuery);
 
             var hardSessionQuery = from session in sessionDb.Sessions
                                    orderby session.Duration descending
                                    where session.Difficulty == 2
                                    select session;
 
-            HardSessions = new ObservableCollection<Session>(hardSessionQuery);
+            HardSessions = new ObservableCollection<SessionModel>(hardSessionQuery);
         }
 
-        public void AddSession(Session session)
+        public void AddSession(SessionModel session)
         {
             sessionDb.Sessions.InsertOnSubmit(session);
             sessionDb.SubmitChanges();

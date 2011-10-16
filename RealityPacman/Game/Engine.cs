@@ -26,6 +26,26 @@ namespace RealityPacman.Game
             }
         }
 
+        public Session Session { get; set; }
+
+        private GeoCoordinate _coordinate;
+        public GeoCoordinate Coordinate
+        {
+            get { return _coordinate; }
+            set
+            {
+                _coordinate = value;
+                if (Player != null)
+                {
+                    Player.Position = value;
+                }
+                if (Session != null && Session.StartCoordinate.IsUnknown)
+                {
+                    Session.StartCoordinate = value;
+                }
+            }
+        }
+
         public Player Player;
 
         public List<Ghost> Ghosts;
@@ -37,13 +57,11 @@ namespace RealityPacman.Game
         const double GhostSpawnMaxLonDiff = 0.001;
         const double GhostSpawnMinLonDiff = 0.0005;
         Random _random;
-        DateTime _startTime;
-        DateTime _endTime;
 
         public delegate void GhostCreated(Ghost ghost);
         public delegate void GhostsMoved();
         public delegate void GameStarted();
-        public delegate void GameOver();
+        public delegate void GameOver(Session session);
 
         public GhostCreated ghostCreated;
         public GhostsMoved ghostsMoved;
@@ -61,22 +79,23 @@ namespace RealityPacman.Game
             _random = new Random();
             Player = new Player();
             Ghosts = new List<Ghost>();
-
-            _endTime = new DateTime(0);
-            _startTime = new DateTime(0);
         }
 
         public void Start()
         {
+            Ghosts.Clear();
+
+            Session = new Session();
+            Session.Difficulty = Difficulty;
+            Session.Start();
+
             _gameTimer.Start();
-            _startTime = DateTime.Now;
-            _endTime = new DateTime(0);
         }
 
         public void Stop()
         {
+            Session.Stop();
             _gameTimer.Stop();
-            _endTime = DateTime.Now;
         }
 
         public void _gameTimer_Tick(Object sender, EventArgs e)
@@ -86,6 +105,8 @@ namespace RealityPacman.Game
                 return;
             }
 
+            Session.AddDuration(_tickInterval);
+
             GenerateGhosts();
 
             // Process each ghost
@@ -93,18 +114,15 @@ namespace RealityPacman.Game
             foreach (Ghost g in Ghosts)
             {
                 g.Process(Player.Position);
-                //System.Diagnostics.Debug.WriteLine("Ghost pos: " + i++ +
-                                                   //" lat: " + g.Position.Latitude +
-                                                   //" lon: " + g.Position.Longitude);
                 System.Diagnostics.Debug.WriteLine("Ghost " + i++ + " distance: " + g.Position.GetDistanceTo(Player.Position));
                 // Check for collision
                 if (g.Position.GetDistanceTo(Player.Position) < 10)
                 {
                     System.Diagnostics.Debug.WriteLine("You were eaten by ghost " + i + "!");
+                    Stop();
                     if (gameOver != null)
                     {
-                        Stop();
-                        gameOver();
+                        gameOver(Session);
                     }
                 }
             }
@@ -123,7 +141,7 @@ namespace RealityPacman.Game
             double ghostCount = Ghosts.Count;
 
             // Likelihood increases with increasing game time duration
-            TimeSpan duration = GameDuration();
+            TimeSpan duration = Session.Duration;
             double durationMultiplier;
             double totalMinutes = duration.TotalMinutes;
             if (totalMinutes < 1)
@@ -163,18 +181,6 @@ namespace RealityPacman.Game
                     // Generate new ghost
                     AddNewGhost();
                 }
-            }
-        }
-
-        public TimeSpan GameDuration()
-        {
-            if (_startTime > _endTime)
-            {
-                return _startTime - DateTime.Now;
-            }
-            else
-            {
-                return _endTime - _startTime;
             }
         }
 

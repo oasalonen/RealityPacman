@@ -71,11 +71,11 @@ namespace RealityPacman
             App.IsIdleModeEnabled = false;
         }
 
-        void gameOver()
+        void gameOver(Session session)
         {
             App.IsIdleModeEnabled = true;
 
-            TimeSpan duration = _engine.GameDuration();
+            TimeSpan duration = session.Duration;
             String durationString = "You lasted ";
             if (duration.Hours >= 1.0)
             {

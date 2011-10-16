@@ -6,7 +6,7 @@ using System.Data.Linq.Mapping;
 namespace RealityPacman.Models
 {
     [Table]
-    public class Session : INotifyPropertyChanged, INotifyPropertyChanging
+    public class SessionModel : INotifyPropertyChanged, INotifyPropertyChanging
     {
         [Column(IsVersion = true)]
         private Binary _version;
@@ -86,6 +86,6 @@ namespace RealityPacman.Models
     {
         public DatabaseContext(string connectionString) : base(connectionString) { }
 
-        public Table<Session> Sessions;
+        public Table<SessionModel> Sessions;
     }
 }
