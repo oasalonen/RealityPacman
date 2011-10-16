@@ -19,7 +19,7 @@ namespace RealityPacman
     public partial class MainPage : PhoneApplicationPage
     {
         Engine _engine;
-        private GeoCoordinateWatcher watcher;
+        private GeoCoordinateWatcher _watcher;
 
         // Constructor
         public MainPage()
@@ -31,16 +31,14 @@ namespace RealityPacman
             _engine.ghostsMoved += new Engine.GhostsMoved(ghostsMoved);
             _engine.gameStarted += new Engine.GameStarted(gameStarted);
             _engine.gameOver += new Engine.GameOver(gameOver);
-            _engine.Start();
             //_engine.Player.Position = new GeoCoordinate(0, 0);
 
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
-            watcher.MovementThreshold = 5;
+            _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            _watcher.MovementThreshold = 5;
 
-            watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
-            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
+            _watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
+            _watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
 
-            watcher.Start();
             rect.Visibility = Visibility.Collapsed;
         }
 
@@ -75,6 +73,12 @@ namespace RealityPacman
         {
             App.IsIdleModeEnabled = true;
 
+            _watcher.Stop();
+
+            // Save session to database
+            App.ViewModel.AddSession(new Models.SessionModel(session));
+
+            // Show game duration in a message box
             TimeSpan duration = session.Duration;
             String durationString = "You lasted ";
             if (duration.Hours >= 1.0)
@@ -118,6 +122,8 @@ namespace RealityPacman
 
             int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
             _engine.Difficulty = (Difficulty) difficultyInt;
+            _engine.Start();
+            _watcher.Start();
         } 
     }
 }

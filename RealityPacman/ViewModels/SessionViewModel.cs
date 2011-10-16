@@ -98,20 +98,36 @@ namespace RealityPacman.ViewModels
         {
             sessionDb.Sessions.InsertOnSubmit(session);
             sessionDb.SubmitChanges();
-            Sessions.Add(session);
+            InsertIntoSessions(Sessions, session);
 
-            switch (session.Difficulty)
+            Game.Difficulty difficulty = (Game.Difficulty)session.Difficulty;
+            switch (difficulty)
             {
-                case 0:
-                    EasySessions.Add(session);
+                case Game.Difficulty.Easy:
+                    InsertIntoSessions(EasySessions, session);
                     break;
-                case 1:
-                    MediumSessions.Add(session);
+                case Game.Difficulty.Medium:
+                    InsertIntoSessions(MediumSessions, session);
                     break;
-                case 2:
-                    HardSessions.Add(session);
+                case Game.Difficulty.Hard:
+                    InsertIntoSessions(HardSessions, session);
                     break;
             }
+        }
+
+        public void InsertIntoSessions(Collection<SessionModel> sessions, SessionModel session)
+        {
+            int i = 0;
+            while (i < sessions.Count)
+            {
+                if (sessions[i].Duration < session.Duration)
+                {
+                    break;
+                }
+                i++;
+            }
+
+            sessions.Insert(i, session);
         }
 
         #region INotifyProperyChanged

@@ -90,12 +90,12 @@ namespace RealityPacman
                 if (!db.DatabaseExists())
                 {
                     db.CreateDatabase();
-                    for (int i = 0; i < 30; i++)
-                    {
-                        Int64 longI = i;
-                        db.Sessions.InsertOnSubmit(new SessionModel { Duration = 1000000000 * longI, Difficulty = i % 3 });
-                    }
-                    db.SubmitChanges();
+                    //for (int i = 0; i < 30; i++)
+                    //{
+                    //    Int64 longI = i;
+                    //    db.Sessions.InsertOnSubmit(new SessionModel { Duration = 1000000000 * longI, Difficulty = i % 3 });
+                    //}
+                    //db.SubmitChanges();
                 }
             }
 

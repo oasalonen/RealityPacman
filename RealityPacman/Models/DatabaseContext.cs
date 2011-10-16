@@ -43,9 +43,9 @@ namespace RealityPacman.Models
             }
         }
 
-        private Int64 _duration;
+        private int _duration;
         [Column]
-        public Int64 Duration
+        public int Duration
         {
             get { return _duration; }
             set
@@ -57,6 +57,14 @@ namespace RealityPacman.Models
                     NotifyPropertyChanged("Duration");
                 }
             }
+        }
+
+        public SessionModel() { }
+
+        public SessionModel(Game.Session session)
+        {
+            Difficulty = (int)session.Difficulty;
+            Duration = (int)session.Duration.TotalMilliseconds;
         }
 
         #region INotifyPropertyChanged, INotifyPropertyChanging
