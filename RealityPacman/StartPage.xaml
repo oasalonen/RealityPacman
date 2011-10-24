@@ -17,7 +17,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Panorama control-->
-        <controls:Panorama Title="Reality Pacman" x:Name="Panorama">
+        <controls:Panorama Title="Ghost maps" x:Name="Panorama">
             <!--<controls:Panorama.Background>
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
             </controls:Panorama.Background>-->
