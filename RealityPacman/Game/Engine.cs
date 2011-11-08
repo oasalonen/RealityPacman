@@ -115,7 +115,7 @@ namespace RealityPacman.Game
             {
                 g.Process(Player.Position);
                 // Check for collision
-                if (g.DistanceToPlayer < 10)
+                if (g.CollidesWith(Player))
                 {
                     Stop();
                     if (gameOver != null)

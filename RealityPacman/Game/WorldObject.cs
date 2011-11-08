@@ -15,6 +15,8 @@ namespace RealityPacman.Game
 {
     public class WorldObject : INotifyPropertyChanged
     {
+        const double CollisionDistanceThreshold = 10.0;
+
         protected GeoCoordinate _position;
         public GeoCoordinate Position
         {
@@ -27,6 +29,11 @@ namespace RealityPacman.Game
                     NotifyPropertyChanged("Position");
                 }
             }
+        }
+
+        public bool CollidesWith(WorldObject worldObject)
+        {
+            return Position.GetDistanceTo(worldObject.Position) < CollisionDistanceThreshold;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
