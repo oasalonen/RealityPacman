@@ -17,7 +17,7 @@ using Microsoft.Phone.Controls.Maps.Platform;
 
 namespace RealityPacman.Game
 {
-    public class Ghost : INotifyPropertyChanged
+    public class Ghost : WorldObject
     {
         enum CoarseHeading
         {
@@ -35,20 +35,6 @@ namespace RealityPacman.Game
         private ObservableCollection<Location> _wayPoints;
 
         private Waypoint StartPosition = new Waypoint();
-
-        private GeoCoordinate _position;
-        public GeoCoordinate Position
-        {
-            get { return _position; }
-            set
-            {
-                if (_position != value)
-                {
-                    _position = value;
-                    NotifyPropertyChanged("Position");
-                }
-            }
-        }
 
         public double DistanceToPlayer { get; set; }
 
@@ -224,16 +210,6 @@ namespace RealityPacman.Game
         {
             _wayPoints = e.Result.Result.RoutePath.Points;
 
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(String propertyName)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
 
         public void SetSpeed(double speed)

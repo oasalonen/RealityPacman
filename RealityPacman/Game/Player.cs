@@ -12,10 +12,9 @@ using System.Device.Location;
 
 namespace RealityPacman.Game
 {
-    public class Player
+    public class Player : WorldObject
     {
         String _name;
-        public GeoCoordinate Position { get; set; }
         public String Name
         {
             get

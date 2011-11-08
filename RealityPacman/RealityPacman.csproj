@@ -73,6 +73,7 @@
     <Compile Include="Game\Ghost.cs" />
     <Compile Include="Game\ProximitySensor.cs" />
     <Compile Include="Game\Session.cs" />
+    <Compile Include="Game\WorldObject.cs" />
     <Compile Include="GhostControl.xaml.cs">
       <DependentUpon>GhostControl.xaml</DependentUpon>
     </Compile>
