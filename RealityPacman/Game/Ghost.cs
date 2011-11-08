@@ -27,7 +27,7 @@ namespace RealityPacman.Game
         }
 
         const double Epsilon = 5.0;
-        public const double DefaultSpeed = 0.000008;
+        public const double DefaultSpeed = 0.000005;
 
         double LatitudeSpeed = DefaultSpeed;
         double LongitudeSpeed = DefaultSpeed;
@@ -49,6 +49,9 @@ namespace RealityPacman.Game
                 }
             }
         }
+
+        public double DistanceToPlayer { get; set; }
+
         CoarseHeading _heading;
         Random _random;
 
@@ -89,6 +92,7 @@ namespace RealityPacman.Game
             StartPosition.Location = position;
             _heading = CoarseHeading.InvalidHeading;
             _random = new Random();
+            DistanceToPlayer = Double.PositiveInfinity;
         }
 
         public void Process(GeoCoordinate userPosition)
@@ -111,7 +115,7 @@ namespace RealityPacman.Game
             }
 
             EyeAngle = Math.Atan2(Position.Latitude - userPosition.Latitude, userPosition.Longitude - Position.Longitude);
-            System.Diagnostics.Debug.WriteLine("Angle: " + (EyeAngle * 180 / Math.PI) + " x: " + EyeX + " y: " + EyeY);
+            DistanceToPlayer = Position.GetDistanceTo(userPosition);
         }
 
         private void CalculateRouting(GeoCoordinate userPosition)

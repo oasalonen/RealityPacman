@@ -57,6 +57,7 @@ namespace RealityPacman.Game
         const double GhostSpawnMaxLonDiff = 0.001;
         const double GhostSpawnMinLonDiff = 0.0005;
         Random _random;
+        ProximitySensor _proximitySensor;
 
         public delegate void GhostCreated(Ghost ghost);
         public delegate void GhostsMoved();
@@ -74,9 +75,9 @@ namespace RealityPacman.Game
             _gameTimer.Interval = new TimeSpan(0, 0, 0, 0, _tickInterval);
             _gameTimer.Tick += new EventHandler(_gameTimer_Tick);
 
-            Difficulty = Difficulty.Easy;
-
+            _proximitySensor = new ProximitySensor();
             _random = new Random();
+            Difficulty = Difficulty.Easy;
             Player = new Player();
             Ghosts = new List<Ghost>();
         }
@@ -110,15 +111,12 @@ namespace RealityPacman.Game
             GenerateGhosts();
 
             // Process each ghost
-            int i = 0;
             foreach (Ghost g in Ghosts)
             {
                 g.Process(Player.Position);
-                System.Diagnostics.Debug.WriteLine("Ghost " + i++ + " distance: " + g.Position.GetDistanceTo(Player.Position));
                 // Check for collision
-                if (g.Position.GetDistanceTo(Player.Position) < 10)
+                if (g.DistanceToPlayer < 10)
                 {
-                    System.Diagnostics.Debug.WriteLine("You were eaten by ghost " + i + "!");
                     Stop();
                     if (gameOver != null)
                     {
@@ -131,6 +129,8 @@ namespace RealityPacman.Game
             {
                 ghostsMoved();
             }
+
+            _proximitySensor.Process(Ghosts, Player);
         }
 
         void GenerateGhosts()
@@ -154,7 +154,7 @@ namespace RealityPacman.Game
             }
             else
             {
-                durationMultiplier = 0.5;
+                durationMultiplier = 0.3;
             }
 
             // And some random stuff to the mix

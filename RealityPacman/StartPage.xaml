@@ -44,7 +44,6 @@
                                          Grid.Row="0" 
                                          x:Name="easyButton" 
                                          GroupName="difficulty" 
-                                         IsChecked="True" 
                                          Checked="easyButton_Checked"/>
                             <RadioButton Content="I feel like jogging" 
                                          Grid.Row="1" 
@@ -67,13 +66,19 @@
                 <controls:PanoramaItem.Resources>
                     <my:DurationFormatter x:Name="durationFormatter" />
                     <DataTemplate x:Key="ScoresListItemTemplate">
-                        <TextBlock Text="{Binding Duration, Converter={StaticResource durationFormatter}}"
-                                   Margin="20,0,0,0"/>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Duration, Converter={StaticResource durationFormatter}}"
+                                       Style="{StaticResource PhoneTextLargeStyle}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Stretch"
+                                       Margin="20,0,0,0"/>
+                        </StackPanel>
                     </DataTemplate>
                 </controls:PanoramaItem.Resources>
 
-                <StackPanel>
-                    <TextBlock Text="(easy)"
+                <StackPanel VerticalAlignment="Stretch">
+                    <TextBlock Text="with easy difficulty"
                                x:Name="ScoresDifficultyLabel"
                                Style="{StaticResource PhoneTextLargeStyle}"
                                Margin="10,0,0,0"/>
@@ -81,7 +86,13 @@
                              ItemsSource="{Binding EasySessions}" 
                              ItemTemplate="{StaticResource ScoresListItemTemplate}"
                              HorizontalAlignment="Stretch"
-                             VerticalAlignment="Top"/>
+                             VerticalAlignment="Stretch"
+                             Margin="0,20,0,0" />
+                    <TextBlock x:Name="NoScoresLabel"
+                               Text="no scores yet" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource PhoneTextSubtleStyle}"/>
                 </StackPanel>
             </controls:PanoramaItem>
 

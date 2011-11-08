@@ -48,20 +48,23 @@ namespace RealityPacman
 
         private void easyButton_Checked(object sender, RoutedEventArgs e)
         {
-            SetScoresDifficultyLabel("(easy)");
+            SetScoresDifficultyLabel("with easy difficulty");
             SetScoreListBinding("EasySessions");
+            NoScoresLabel.Visibility = (App.ViewModel.EasySessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void mediumButton_Checked(object sender, RoutedEventArgs e)
         {
-            SetScoresDifficultyLabel("(medium)");
+            SetScoresDifficultyLabel("with medium difficulty");
             SetScoreListBinding("MediumSessions");
+            NoScoresLabel.Visibility = (App.ViewModel.MediumSessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void hardButton_Checked(object sender, RoutedEventArgs e)
         {
-            SetScoresDifficultyLabel("(hard)");
+            SetScoresDifficultyLabel("with hard difficulty");
             SetScoreListBinding("HardSessions");
+            NoScoresLabel.Visibility = (App.ViewModel.HardSessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void SetScoresDifficultyLabel(string difficulty)
