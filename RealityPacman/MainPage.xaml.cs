@@ -28,6 +28,8 @@ namespace RealityPacman
 
             _engine = new Engine();
             _engine.ghostCreated += new Engine.GhostCreated(ghostCreated);
+            _engine.worldObjectCreated += new Engine.WorldObjectCreated(worldObjectCreated);
+            _engine.worldObjectRemoved += new Engine.WorldObjectRemoved(worldObjectRemoved);
             _engine.ghostsMoved += new Engine.GhostsMoved(ghostsMoved);
             _engine.gameStarted += new Engine.GameStarted(gameStarted);
             _engine.gameOver += new Engine.GameOver(gameOver);
@@ -48,6 +50,30 @@ namespace RealityPacman
             ghostControl.DataContext = ghost;
 
             positionLayer.AddChild(ghostControl, ghost.Position);
+        }
+
+        void worldObjectCreated(WorldObject worldObject)
+        {
+            MapItemControl itemControl = new MapItemControl();
+            itemControl.DataContext = worldObject;
+
+            itemLayer.AddChild(itemControl, worldObject.Position);
+        }
+
+        void worldObjectRemoved(WorldObject worldObject)
+        {
+            foreach (UIElement e in itemLayer.Children)
+            {
+                MapItemControl mapItem = e as MapItemControl;
+                if (mapItem != null)
+                {
+                    if (mapItem.DataContext == worldObject)
+                    {
+                        itemLayer.Children.Remove(e);
+                        return;
+                    }
+                }
+            }
         }
 
         void ghostsMoved()
@@ -96,7 +122,7 @@ namespace RealityPacman
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            // TODO: care about status
+            // TODO: indicate status
         }
 
         GeoCoordinate lastPlayerPosition=null;

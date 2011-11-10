@@ -70,6 +70,7 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Game\Difficulty.cs" />
     <Compile Include="Game\Engine.cs" />
+    <Compile Include="Game\Fruit.cs" />
     <Compile Include="Game\Ghost.cs" />
     <Compile Include="Game\ProximitySensor.cs" />
     <Compile Include="Game\Session.cs" />
@@ -79,6 +80,9 @@
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MapItemControl.xaml.cs">
+      <DependentUpon>MapItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="PacMan.xaml.cs">
@@ -109,6 +113,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MapItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PacMan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +144,7 @@
     <Resource Include="ghost_anim_row-01.png" />
     <Resource Include="eyes.png" />
     <Resource Include="man_anim_row-01.png" />
+    <Resource Include="fruit.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>

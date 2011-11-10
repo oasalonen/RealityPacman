@@ -31,6 +31,15 @@ namespace RealityPacman.Game
             }
         }
 
+        public WorldObject()
+        {
+        }
+
+        public WorldObject(GeoCoordinate position)
+        {
+            Position = position;
+        }
+
         public bool CollidesWith(WorldObject worldObject)
         {
             return Position.GetDistanceTo(worldObject.Position) < CollisionDistanceThreshold;

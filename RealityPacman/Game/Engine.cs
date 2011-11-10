@@ -16,6 +16,18 @@ namespace RealityPacman.Game
 {
     public class Engine
     {
+        // ---------- Constants ----------
+        const int _tickInterval = 250; // Engine ticks every 250 ms
+
+        const double GhostSpawnMaxCoordDiff = 0.001;
+        const double GhostSpawnMinCoordDiff = 0.0005;
+
+        const double ItemSpawnMaxCoordDiff = 0.001;
+        const double ItemSpawnMinCoordDiff = 0.0001;
+
+        const double ItemSpawnLikelihood = 0.02;
+
+        // ---------- Members ----------
         private DifficultySettings _difficulty;
         public Difficulty Difficulty 
         {
@@ -47,15 +59,10 @@ namespace RealityPacman.Game
         }
 
         public Player Player;
-
         public List<Ghost> Ghosts;
+        public List<WorldObject> WorldItems;
 
         DispatcherTimer _gameTimer;
-        const int _tickInterval = 250; // Engine ticks every 250 ms
-        const double GhostSpawnMaxLatDiff = 0.001;
-        const double GhostSpawnMinLatDiff = 0.0005;
-        const double GhostSpawnMaxLonDiff = 0.001;
-        const double GhostSpawnMinLonDiff = 0.0005;
         Random _random;
         ProximitySensor _proximitySensor;
 
@@ -63,11 +70,17 @@ namespace RealityPacman.Game
         public delegate void GhostsMoved();
         public delegate void GameStarted();
         public delegate void GameOver(Session session);
+        public delegate void WorldObjectCreated(WorldObject worldObject);
+        public delegate void WorldObjectRemoved(WorldObject worldObject);
 
         public GhostCreated ghostCreated;
         public GhostsMoved ghostsMoved;
         public GameStarted gameStarted;
         public GameOver gameOver;
+        public WorldObjectCreated worldObjectCreated;
+        public WorldObjectRemoved worldObjectRemoved;
+
+        // ---------- Methods ----------
 
         public Engine()
         {
@@ -80,6 +93,7 @@ namespace RealityPacman.Game
             Difficulty = Difficulty.Easy;
             Player = new Player();
             Ghosts = new List<Ghost>();
+            WorldItems = new List<WorldObject>();
         }
 
         public void Start()
@@ -109,6 +123,7 @@ namespace RealityPacman.Game
             Session.AddDuration(_tickInterval);
 
             GenerateGhosts();
+            GenerateItems();
 
             // Process each ghost
             foreach (Ghost g in Ghosts)
@@ -131,6 +146,25 @@ namespace RealityPacman.Game
             }
 
             _proximitySensor.Process(Ghosts, Player);
+
+            // Consume any colliding items
+            List<WorldObject> removeList = new List<WorldObject>();
+            foreach (WorldObject o in WorldItems)
+            {
+                if (Player.CollidesWith(o))
+                {
+                    Player.Consume(o);
+                    removeList.Add(o);
+                    if (worldObjectRemoved != null)
+                    {
+                        worldObjectRemoved(o);
+                    }
+                }
+            }
+            foreach (WorldObject o in removeList)
+            {
+                WorldItems.Remove(o);
+            }
         }
 
         void GenerateGhosts()
@@ -184,12 +218,26 @@ namespace RealityPacman.Game
             }
         }
 
+        void GenerateItems()
+        {
+            double likelihood = ItemSpawnLikelihood;
+            if (WorldItems.Count != 0)
+            {
+                likelihood /= WorldItems.Count;
+            }
+            double threshold = _random.NextDouble();
+            if (likelihood > threshold)
+            {
+                AddNewItem();
+            }
+        }
+
         void AddNewGhost()
         {
             // Randomize location at X meters from player
             GeoCoordinate ghostPosition = new GeoCoordinate();
-            ghostPosition.Latitude = CoordinateWithinBounds(Player.Position.Latitude, GhostSpawnMaxLatDiff, GhostSpawnMinLatDiff);
-            ghostPosition.Longitude = CoordinateWithinBounds(Player.Position.Longitude, GhostSpawnMaxLonDiff, GhostSpawnMinLonDiff);
+            ghostPosition.Latitude = CoordinateWithinBounds(Player.Position.Latitude, GhostSpawnMaxCoordDiff, GhostSpawnMinCoordDiff);
+            ghostPosition.Longitude = CoordinateWithinBounds(Player.Position.Longitude, GhostSpawnMaxCoordDiff, GhostSpawnMinCoordDiff);
 
             Ghost newGhost = new Ghost(ghostPosition);
             switch (Difficulty)
@@ -210,6 +258,22 @@ namespace RealityPacman.Game
             if (ghostCreated != null)
             {
                 ghostCreated(newGhost);
+            }
+        }
+
+        void AddNewItem()
+        {
+            // Randomize location at X meters from player
+            GeoCoordinate position = new GeoCoordinate();
+            position.Latitude = CoordinateWithinBounds(Player.Position.Latitude, ItemSpawnMaxCoordDiff, ItemSpawnMinCoordDiff);
+            position.Longitude = CoordinateWithinBounds(Player.Position.Longitude, ItemSpawnMaxCoordDiff, ItemSpawnMinCoordDiff);
+
+            Fruit fruit = new Fruit(position);
+            WorldItems.Add(fruit);
+
+            if (worldObjectCreated != null)
+            {
+                worldObjectCreated(fruit);
             }
         }
 

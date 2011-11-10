@@ -33,5 +33,14 @@ namespace RealityPacman.Game
                 _name = value;
             }
         }
+
+        public void Consume(WorldObject o)
+        {
+            Fruit fruit = o as Fruit;
+            if (fruit != null)
+            {
+                // Something happens?
+            }
+        }
     }
 }

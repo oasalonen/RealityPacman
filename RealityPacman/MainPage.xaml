@@ -29,6 +29,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <my:Map HorizontalAlignment="Stretch" Name="map" VerticalAlignment="Stretch" ZoomLevel="17" CredentialsProvider="Al9X2Bk2UP07iOZG9N_pt4yGUWpLHcyGmG5EjiRSZDFi4EJn6AnF6MxtGfehDJZi" >
+                <my:MapLayer x:Name="itemLayer" />
                 <my:MapLayer x:Name="positionLayer">
                     <uc:PacMan x:Name="rect" />
                 </my:MapLayer>
