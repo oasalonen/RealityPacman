@@ -34,12 +34,26 @@ namespace RealityPacman.Game
             }
         }
 
+        public int FruitsConsumed { get; set; }
+
+        public Player() :
+            this(new GeoCoordinate())
+        {
+        }
+
+        public Player(GeoCoordinate position) :
+            base(position)
+        {
+            FruitsConsumed = 0;
+        }
+
         public void Consume(WorldObject o)
         {
             Fruit fruit = o as Fruit;
             if (fruit != null)
             {
                 // Something happens?
+                FruitsConsumed++;
             }
         }
     }

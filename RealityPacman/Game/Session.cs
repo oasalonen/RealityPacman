@@ -19,6 +19,7 @@ namespace RealityPacman.Game
         public TimeSpan Duration { get; set; }
         public Difficulty Difficulty { get; set; }
         public GeoCoordinate StartCoordinate { get; set; }
+        public int FruitsConsumed { get; set; }
 
         public Session()
         {
@@ -27,6 +28,7 @@ namespace RealityPacman.Game
             Duration = new TimeSpan(0);
             Difficulty = Difficulty.Easy;
             StartCoordinate = new GeoCoordinate();
+            FruitsConsumed = 0;
         }
 
         public void Start()

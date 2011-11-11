@@ -156,6 +156,7 @@ namespace RealityPacman.Game
                 {
                     Player.Consume(o);
                     removeList.Add(o);
+                    Session.FruitsConsumed = Player.FruitsConsumed;
                     if (worldObjectRemoved != null)
                     {
                         worldObjectRemoved(o);

@@ -139,6 +139,22 @@ namespace RealityPacman.Models
             }
         }
 
+        private int _fruitsConsumed;
+        [Column]
+        public int FruitsConsumed
+        {
+            get { return _fruitsConsumed; }
+            set
+            {
+                if (_fruitsConsumed != value)
+                {
+                    NotifyPropertyChanging("FruitsConsumed");
+                    _fruitsConsumed = value;
+                    NotifyPropertyChanged("FruitsConsumed");
+                }
+            }
+        }
+
         public SessionModel() { }
 
         public SessionModel(Game.Session session)
@@ -150,6 +166,7 @@ namespace RealityPacman.Models
             StartLatitude = session.StartCoordinate.Latitude;
             StartLongitude = session.StartCoordinate.Longitude;
             StartAltitude = session.StartCoordinate.Altitude;
+            FruitsConsumed = session.FruitsConsumed;
         }
 
         #region INotifyPropertyChanged, INotifyPropertyChanging
