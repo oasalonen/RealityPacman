@@ -26,6 +26,7 @@ namespace RealityPacman.Game
         const double ItemSpawnMinCoordDiff = 0.0001;
 
         const double ItemSpawnLikelihood = 0.02;
+        const int MaximumItemCount = 10;
 
         // ---------- Members ----------
         private DifficultySettings _difficulty;
@@ -220,6 +221,11 @@ namespace RealityPacman.Game
 
         void GenerateItems()
         {
+            if (WorldItems.Count >= MaximumItemCount)
+            {
+                return;
+            }
+
             double likelihood = ItemSpawnLikelihood;
             if (WorldItems.Count != 0)
             {
