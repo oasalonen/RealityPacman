@@ -37,9 +37,10 @@ namespace RealityPacman
 
             _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
             _watcher.MovementThreshold = 0;
-
             _watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
             _watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
+
+            gpsHideAnimation.Completed += new EventHandler(gpsHideAnimation_Completed);
 
             rect.Visibility = Visibility.Collapsed;
         }
@@ -122,7 +123,25 @@ namespace RealityPacman
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            // TODO: indicate status
+            switch (e.Status)
+            {
+                case GeoPositionStatus.Disabled:
+                    gpsStatusLabel.Text = "Please enable positioning on this device";
+                    setGpsStatusBarVisibility(Visibility.Visible);
+                    break;
+                case GeoPositionStatus.Initializing:
+                    gpsStatusLabel.Text = "Looking for your position";
+                    setGpsStatusBarVisibility(Visibility.Visible);
+                    break;
+                case GeoPositionStatus.NoData:
+                    gpsStatusLabel.Text = "Looking for your position";
+                    setGpsStatusBarVisibility(Visibility.Visible);
+                    break;
+                case GeoPositionStatus.Ready:
+                    gpsStatusLabel.Text = "Position acquired";
+                    setGpsStatusBarVisibility(Visibility.Collapsed);
+                    break;
+            }
         }
 
         GeoCoordinate lastPlayerPosition=null;
@@ -140,6 +159,31 @@ namespace RealityPacman
             }
             lastPlayerPosition = e.Position.Location;
             rect.Visibility = Visibility.Visible;
+        }
+
+        private void setGpsStatusBarVisibility(Visibility visibility)
+        {
+            if (gpsStatusBox.Visibility == visibility)
+            {
+                return;
+            }
+
+            if (gpsStatusBox.Visibility == Visibility.Collapsed)
+            {
+                gpsStatusBox.Visibility = visibility;
+                gpsHideAnimation.Stop();
+                gpsShowAnimation.Begin();
+            }
+            else if (gpsStatusBox.Visibility == Visibility.Visible)
+            {
+                gpsShowAnimation.Stop();
+                gpsHideAnimation.Begin();
+            }
+        }
+
+        private void gpsHideAnimation_Completed(object sender, EventArgs e)
+        {
+            gpsStatusBox.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

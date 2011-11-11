@@ -14,26 +14,76 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="GHOST MAPS" Style="{StaticResource PhoneTextNormalStyle}"/>
-        </StackPanel>
+    <Canvas x:Name="mapCanvas">
+        <my:Map Name="map" 
+                Canvas.Top="0"
+                Canvas.Left="0"
+                Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
+                Height="{Binding ElementName=mapCanvas, Path=ActualHeight}"
+                ZoomLevel="17" 
+                CredentialsProvider="Al9X2Bk2UP07iOZG9N_pt4yGUWpLHcyGmG5EjiRSZDFi4EJn6AnF6MxtGfehDJZi" >
+            <my:MapLayer x:Name="itemLayer" />
+            <my:MapLayer x:Name="positionLayer">
+                <uc:PacMan x:Name="rect" />
+            </my:MapLayer>
+        </my:Map>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <my:Map HorizontalAlignment="Stretch" Name="map" VerticalAlignment="Stretch" ZoomLevel="17" CredentialsProvider="Al9X2Bk2UP07iOZG9N_pt4yGUWpLHcyGmG5EjiRSZDFi4EJn6AnF6MxtGfehDJZi" >
-                <my:MapLayer x:Name="itemLayer" />
-                <my:MapLayer x:Name="positionLayer">
-                    <uc:PacMan x:Name="rect" />
-                </my:MapLayer>
-            </my:Map>
+        <Grid x:Name="gpsStatusBox"
+              Canvas.Top="0"
+              Canvas.Left="0"
+              Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
+              Background="Black"
+              Opacity="0.6">
+            
+            <!-- GPS label hide animation -->
+            <Grid.Resources>
+                <Storyboard x:Name="gpsHideAnimation">
+                    <DoubleAnimationUsingKeyFrames
+                        Storyboard.TargetName="gpsStatusBox"
+                        Storyboard.TargetProperty="(Canvas.Top)">
+                        <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                        <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
+                        <EasingDoubleKeyFrame Value="-100" KeyTime="0:0:6">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <ExponentialEase Exponent="3" EasingMode="EaseOut" />
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Name="gpsShowAnimation">
+                    <DoubleAnimation
+                            From="-100" To="0" Duration="0:0:1"
+                            Storyboard.TargetName="gpsStatusBox"
+                            Storyboard.TargetProperty="(Canvas.Top)"
+                            >
+                        <DoubleAnimation.EasingFunction>
+                            <ExponentialEase Exponent="3" EasingMode="EaseOut" />
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </Grid.Resources>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <!-- GPS label contents -->
+            <Image Grid.Row="0" 
+                   Grid.Column="0"
+                   Source="fruit.png"
+                   Width="40"
+                   Height="40"/>
+            <TextBlock x:Name="gpsStatusLabel"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       Text="Getting a GPS fix" 
+                       VerticalAlignment="Center"/>
         </Grid>
-    </Grid>
+    </Canvas>
+    
 </phone:PhoneApplicationPage>

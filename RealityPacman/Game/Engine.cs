@@ -106,6 +106,11 @@ namespace RealityPacman.Game
             Session.Start();
 
             _gameTimer.Start();
+
+            if (gameStarted != null)
+            {
+                gameStarted();
+            }
         }
 
         public void Stop()
