@@ -7,7 +7,7 @@ using RealityPacman.Models;
 
 namespace RealityPacman.ViewModels
 {
-    public class SessionViewModel : INotifyPropertyChanged
+    public class SessionViewModel : INotifyPropertyChanged, IDisposable
     {
         private DatabaseContext sessionDb;
 
@@ -58,6 +58,11 @@ namespace RealityPacman.ViewModels
         public SessionViewModel(string dbConnectionString)
         {
             sessionDb = new DatabaseContext(dbConnectionString);
+        }
+
+        public void Dispose()
+        {
+            sessionDb.Dispose();
         }
 
         public void Save()

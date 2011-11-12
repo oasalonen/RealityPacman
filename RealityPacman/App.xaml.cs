@@ -101,6 +101,11 @@ namespace RealityPacman
                     //}
                     //db.SubmitChanges();
                 }
+                else
+                {
+                    db.DeleteDatabase();
+                    db.CreateDatabase();
+                }
             }
 
             _viewModel = new SessionViewModel(dbConnectionString);

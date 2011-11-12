@@ -101,7 +101,16 @@ namespace RealityPacman
                     break;
             }
             base.OnNavigatedTo(e);
-        }
+        }
+
+        private void panorama_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Contains(newGamePanoramItem))
+            {
+                startAnimation.Begin();
+            }
+        }
+
     }
 
     public class DurationFormatter : IValueConverter

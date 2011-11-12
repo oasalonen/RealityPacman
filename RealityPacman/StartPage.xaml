@@ -17,12 +17,12 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Panorama control-->
-        <controls:Panorama Title="Ghost maps" x:Name="Panorama">
-            <!--<controls:Panorama.Background>
-                <ImageBrush ImageSource="PanoramaBackground.png"/>
-            </controls:Panorama.Background>-->
+        <controls:Panorama Title="Ghost maps" x:Name="panorama" SelectionChanged="panorama_SelectionChanged">
+            <controls:Panorama.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="ghost_background.png"/>
+            </controls:Panorama.Background>
 
-            <controls:PanoramaItem Header="new game">
+            <controls:PanoramaItem x:Name="newGamePanoramItem" Header="new game">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -57,7 +57,35 @@
                                          Checked="hardButton_Checked"/>
                         </Grid>
                     <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
-                        <Button x:Name="StartButton" Content="Start!" Click="StartButton_Click" />
+                        <StackPanel.Resources>
+                            <Storyboard x:Name="startAnimation">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="startProjection"
+                                                               Storyboard.TargetProperty="RotationY">
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+                                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:4"/>
+                                    <EasingDoubleKeyFrame Value="45" KeyTime="0:0:4.2">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <QuarticEase EasingMode="EaseIn"/>
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>
+                                    <LinearDoubleKeyFrame Value="-45" KeyTime="0:0:4.6"/>
+                                    <EasingDoubleKeyFrame Value="0" KeyTime="0:0:6.0">
+                                        <EasingDoubleKeyFrame.EasingFunction>
+                                            <ElasticEase EasingMode="EaseOut"/>
+                                        </EasingDoubleKeyFrame.EasingFunction>
+                                    </EasingDoubleKeyFrame>                                    
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </StackPanel.Resources>
+                        <HyperlinkButton x:Name="StartButton"
+                                         HorizontalAlignment="Right"
+                                         Content="start game" 
+                                         Click="StartButton_Click"
+                                         FontSize="{StaticResource PhoneFontSizeExtraLarge}">
+                                <HyperlinkButton.Projection>
+                                    <PlaneProjection x:Name="startProjection" RotationY="0" />
+                                </HyperlinkButton.Projection>
+                        </HyperlinkButton>
                     </StackPanel>
                 </Grid>
             </controls:PanoramaItem>

@@ -143,6 +143,7 @@
     <None Include="Service References\Routing\service.xsd" />
     <Resource Include="ghost_anim_row-01.png" />
     <Resource Include="eyes.png" />
+    <Resource Include="ghost_background.png" />
     <Resource Include="man_anim_row-01.png" />
     <Resource Include="fruit.png" />
     <Content Include="ServiceReferences.ClientConfig" />
