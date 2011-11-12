@@ -24,6 +24,7 @@ namespace RealityPacman
                 "\r\n\r\nMind your surroundings while playing. Cars heading your way are not indicated on the map!";
 
             ScoresPanoramaItem.DataContext = App.ViewModel;
+            startAnimation.Begin();
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)

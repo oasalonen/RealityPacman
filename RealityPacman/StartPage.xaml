@@ -56,7 +56,7 @@
                                          GroupName="difficulty" 
                                          Checked="hardButton_Checked"/>
                         </Grid>
-                    <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+                    <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <StackPanel.Resources>
                             <Storyboard x:Name="startAnimation">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="startProjection"
@@ -68,8 +68,8 @@
                                             <QuarticEase EasingMode="EaseIn"/>
                                         </EasingDoubleKeyFrame.EasingFunction>
                                     </EasingDoubleKeyFrame>
-                                    <LinearDoubleKeyFrame Value="-45" KeyTime="0:0:4.6"/>
-                                    <EasingDoubleKeyFrame Value="0" KeyTime="0:0:6.0">
+                                    <LinearDoubleKeyFrame Value="-45" KeyTime="0:0:4.5"/>
+                                    <EasingDoubleKeyFrame Value="0" KeyTime="0:0:6.5">
                                         <EasingDoubleKeyFrame.EasingFunction>
                                             <ElasticEase EasingMode="EaseOut"/>
                                         </EasingDoubleKeyFrame.EasingFunction>
@@ -78,7 +78,6 @@
                             </Storyboard>
                         </StackPanel.Resources>
                         <HyperlinkButton x:Name="StartButton"
-                                         HorizontalAlignment="Right"
                                          Content="start game" 
                                          Click="StartButton_Click"
                                          FontSize="{StaticResource PhoneFontSizeExtraLarge}">
