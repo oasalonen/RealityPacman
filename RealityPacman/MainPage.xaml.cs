@@ -181,9 +181,56 @@ namespace RealityPacman
             }
         }
 
+        private void endGameYesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                _watcher.Stop();
+                _engine.Stop();
+                _watcher = null;
+                _engine = null;
+                NavigationService.GoBack();
+            }
+        }
+
+        private void endGameNoButton_Click(object sender, RoutedEventArgs e)
+        {
+            endGameYesNoAnimation.Stop();
+            endGameHideAnimation.Begin();
+        }
+
         private void gpsHideAnimation_Completed(object sender, EventArgs e)
         {
             gpsStatusBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void endGameYesNoAnimation_Completed(object sender, EventArgs e)
+        {
+            endGamePrompt.Visibility = Visibility.Collapsed;
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            if (endGamePrompt.Visibility == Visibility.Visible)
+            {
+                if (endGameHideAnimation.GetCurrentState() != ClockState.Active)
+                {
+                    endGameYesNoAnimation.Stop();
+                    endGameHideAnimation.Begin();
+                }
+                else
+                {
+                    endGameHideAnimation.Stop();
+                    endGameYesNoAnimation.Begin();
+                }
+            }
+            else
+            {
+                endGamePrompt.Visibility = Visibility.Visible;
+                endGamePrompt.Opacity = 0.6;
+                endGameYesNoAnimation.Begin();
+            }
+            e.Cancel = true;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -191,9 +238,9 @@ namespace RealityPacman
             base.OnNavigatedTo(e);
 
             int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
-            _engine.Difficulty = (Difficulty) difficultyInt;
+            _engine.Difficulty = (Difficulty)difficultyInt;
             _engine.Start();
             _watcher.Start();
-        } 
+        }
     }
 }

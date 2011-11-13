@@ -29,6 +29,8 @@ namespace RealityPacman
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            startAnimation.Stop();
+
             Game.Difficulty difficulty;
             if (easyButton.IsChecked.Value)
             {

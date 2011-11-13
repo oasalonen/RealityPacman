@@ -14,8 +14,39 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
 
-
     <Canvas x:Name="mapCanvas">
+        <Canvas.Resources>
+            <Storyboard x:Name="endGameYesNoAnimation" Completed="endGameYesNoAnimation_Completed">
+                <DoubleAnimation Storyboard.TargetName="endGamePromptProjection"
+                                 Storyboard.TargetProperty="RotationY"
+                                 From="90" To="0" Duration="0:0:0.5">
+                    <DoubleAnimation.EasingFunction>
+                        <QuarticEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation Storyboard.TargetName="endGameNoButtonProjection"
+                                 Storyboard.TargetProperty="LocalOffsetZ"
+                                 From="-500" To="500"  Duration="0:0:8"/>
+                <DoubleAnimation Storyboard.TargetName="endGameYesButtonProjection"
+                                 Storyboard.TargetProperty="LocalOffsetZ"
+                                 From="500" To="-500"  Duration="0:0:8"/>
+                <DoubleAnimation Storyboard.TargetName="endGamePrompt"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0.6" To="0"  Duration="0:0:1.5"
+                                 BeginTime="0:0:6.5"/>
+            </Storyboard>
+            
+            <Storyboard x:Name="endGameHideAnimation" Completed="endGameYesNoAnimation_Completed">
+                <DoubleAnimation Storyboard.TargetName="endGamePromptProjection"
+                                 Storyboard.TargetProperty="RotationY"
+                                 From="0" To="90" Duration="0:0:0.8">
+                    <DoubleAnimation.EasingFunction>
+                        <QuarticEase EasingMode="EaseOut"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </Canvas.Resources>
+        
         <my:Map Name="map" 
                 Canvas.Top="0"
                 Canvas.Left="0"
@@ -83,6 +114,63 @@
                        Grid.Column="1"
                        Text="Getting a GPS fix" 
                        VerticalAlignment="Center"/>
+        </Grid>
+        
+        <Grid x:Name="endGamePrompt"
+              Canvas.Top="0"
+              Canvas.Left="0"
+              Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
+              Height="{Binding ElementName=mapCanvas, Path=ActualHeight}"
+              Background="Black"
+              Opacity="0.6"
+              Visibility="Collapsed">
+            
+            <Grid.Projection>
+                <PlaneProjection x:Name="endGamePromptProjection"
+                                 CenterOfRotationX="0.0"
+                                 RotationY="90"/>
+            </Grid.Projection>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="1" 
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       Text="Going back will end the game. Proceed?"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource PhoneTextLargeStyle}"
+                       Margin="0, 20, 0, 20"/>
+            <HyperlinkButton x:Name="endGameNoButton"
+                             Grid.Row="2"
+                             Grid.Column="0"
+                             Content="No"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                             VerticalAlignment="Center"
+                             Click="endGameNoButton_Click">
+                <HyperlinkButton.Projection>
+                    <PlaneProjection x:Name="endGameNoButtonProjection"/>
+                </HyperlinkButton.Projection>
+            </HyperlinkButton>
+            <HyperlinkButton x:Name="endGameYesButton"
+                             Grid.Row="2"
+                             Grid.Column="1"
+                             Content="Yes"
+                             FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                             VerticalAlignment="Center"
+                             Click="endGameYesButton_Click">
+                <HyperlinkButton.Projection>
+                    <PlaneProjection x:Name="endGameYesButtonProjection"/>
+                </HyperlinkButton.Projection>
+            </HyperlinkButton>
         </Grid>
     </Canvas>
     
