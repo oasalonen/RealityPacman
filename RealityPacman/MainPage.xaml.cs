@@ -117,12 +117,14 @@ namespace RealityPacman
                 durationString += (int)duration.Minutes + " min ";
             }
             durationString += (int)duration.Seconds + " s.";
-            MessageBox.Show("Game over, " + _engine.Player.Name + "! " + durationString);
+            MessageBox.Show("Game over! " + durationString);
             NavigationService.GoBack();
         }
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
+            gpsStatusImage.Status = e.Status;
+
             switch (e.Status)
             {
                 case GeoPositionStatus.Disabled:

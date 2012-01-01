@@ -65,7 +65,7 @@
               Canvas.Left="0"
               Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
               Background="Black"
-              Opacity="0.6">
+              Opacity="0.70">
             
             <!-- GPS label hide animation -->
             <Grid.Resources>
@@ -96,7 +96,7 @@
             </Grid.Resources>
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
+                <RowDefinition Height="64" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
@@ -104,11 +104,9 @@
             </Grid.ColumnDefinitions>
             
             <!-- GPS label contents -->
-            <Image Grid.Row="0" 
-                   Grid.Column="0"
-                   Source="fruit.png"
-                   Width="40"
-                   Height="40"/>
+            <uc:GpsStatusControl x:Name="gpsStatusImage" 
+                                 Grid.Row="0"
+                                 Grid.Column="0"/>
             <TextBlock x:Name="gpsStatusLabel"
                        Grid.Row="0"
                        Grid.Column="1"
