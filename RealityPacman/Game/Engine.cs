@@ -129,7 +129,8 @@ namespace RealityPacman.Game
             Session.AddDuration(_tickInterval);
 
             GenerateGhosts();
-            GenerateItems();
+            // TODO: item generation disabled for first release
+            //GenerateItems();
 
             // Process each ghost
             foreach (Ghost g in Ghosts)
