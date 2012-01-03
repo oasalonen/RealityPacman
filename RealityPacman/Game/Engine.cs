@@ -259,10 +259,10 @@ namespace RealityPacman.Game
                     newGhost.SetSpeed(Ghost.DefaultSpeed);
                     break;
                 case Difficulty.Medium:
-                    newGhost.SetSpeed(Ghost.DefaultSpeed * 1.5);
+                    newGhost.SetSpeed(Ghost.DefaultSpeed * 2.0);
                     break;
                 case Difficulty.Hard:
-                    newGhost.SetSpeed(Ghost.DefaultSpeed * 2.0);
+                    newGhost.SetSpeed(Ghost.DefaultSpeed * 3.0);
                     break;
             }
 

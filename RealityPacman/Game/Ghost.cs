@@ -27,7 +27,7 @@ namespace RealityPacman.Game
         }
 
         const double Epsilon = 5.0;
-        public const double DefaultSpeed = 0.000005;
+        public const double DefaultSpeed = 0.0000025;
 
         double LatitudeSpeed = DefaultSpeed;
         double LongitudeSpeed = DefaultSpeed;
