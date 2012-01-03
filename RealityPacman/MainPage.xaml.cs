@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Maps;
 using System.Device.Location;
 using RealityPacman.Game;
+using Microsoft.Devices.Sensors;
 
 namespace RealityPacman
 {
@@ -20,6 +21,7 @@ namespace RealityPacman
     {
         Engine _engine;
         private GeoCoordinateWatcher _watcher;
+        private Compass _compass; 
 
         // Constructor
         public MainPage()
@@ -39,6 +41,13 @@ namespace RealityPacman
             _watcher.MovementThreshold = 0;
             _watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
             _watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
+
+            if (Compass.IsSupported)
+            {
+                _compass = new Compass();
+                _compass.CurrentValueChanged += new EventHandler<SensorReadingEventArgs<CompassReading>>(compassChanged);
+                _compass.Start();
+            }
 
             gpsHideAnimation.Completed += new EventHandler(gpsHideAnimation_Completed);
 
@@ -154,13 +163,25 @@ namespace RealityPacman
             map.Center = e.Position.Location;
             _engine.Player.Position = e.Position.Location;
 
-            if (lastPlayerPosition != null)
+            if (lastPlayerPosition != null && _compass == null)
             {
                 double angle = Math.Atan2( lastPlayerPosition.Latitude -e.Position.Location.Latitude, e.Position.Location.Longitude - lastPlayerPosition.Longitude);
                 rect.turn(angle);
             }
             lastPlayerPosition = e.Position.Location;
             rect.Visibility = Visibility.Visible;
+        }
+
+        private void turnPlayer(double angle)
+        {
+            rect.turn((angle - 90) * Math.PI / 180);
+
+        }
+
+        private void compassChanged(object sender, SensorReadingEventArgs<CompassReading> e)
+        {
+            CompassReading reading = (CompassReading)e.SensorReading;
+            Dispatcher.BeginInvoke(() => { turnPlayer(reading.TrueHeading); });
         }
 
         private void setGpsStatusBarVisibility(Visibility visibility)
