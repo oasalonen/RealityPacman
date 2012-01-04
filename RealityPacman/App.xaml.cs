@@ -116,6 +116,16 @@ namespace RealityPacman
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            Uri uri;
+            if (Settings.IsDisclaimerAccepted == false)
+            {
+                uri = new Uri("/DisclaimerPage.xaml", UriKind.Relative);
+            }
+            else
+            {
+                uri = new Uri("/StartPage.xaml", UriKind.Relative);
+            }
+            ((App)Application.Current).RootFrame.Navigate(uri);
         }
 
         // Code to execute when the application is activated (brought to foreground)

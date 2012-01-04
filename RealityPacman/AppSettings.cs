@@ -16,6 +16,7 @@ namespace RealityPacman
     {
         private IsolatedStorageSettings _settings;
         private const string PreferredDifficultySettingName = "PreferredDifficultySetting";
+        private const string IsDisclaimerAcceptedSettingName = "IsDisclaimerAcceptedSetting";
 
         public AppSettings()
         {
@@ -31,6 +32,18 @@ namespace RealityPacman
             set
             {
                 SetValue(PreferredDifficultySettingName, value);
+            }
+        }
+
+        public bool IsDisclaimerAccepted
+        {
+            get
+            {
+                return GetValue<bool>(IsDisclaimerAcceptedSettingName, false);
+            }
+            set
+            {
+                SetValue(IsDisclaimerAcceptedSettingName, value);
             }
         }
 
