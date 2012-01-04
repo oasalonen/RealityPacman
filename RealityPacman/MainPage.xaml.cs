@@ -159,17 +159,20 @@ namespace RealityPacman
 
         void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
-            MapLayer.SetPosition(rect, e.Position.Location);
-            map.Center = e.Position.Location;
-            _engine.Player.Position = e.Position.Location;
-
-            if (lastPlayerPosition != null && _compass == null)
+            if (_engine != null)
             {
-                double angle = Math.Atan2( lastPlayerPosition.Latitude -e.Position.Location.Latitude, e.Position.Location.Longitude - lastPlayerPosition.Longitude);
-                rect.turn(angle);
+                MapLayer.SetPosition(rect, e.Position.Location);
+                map.Center = e.Position.Location;
+                _engine.Player.Position = e.Position.Location;
+
+                if (lastPlayerPosition != null && _compass == null)
+                {
+                    double angle = Math.Atan2(lastPlayerPosition.Latitude - e.Position.Location.Latitude, e.Position.Location.Longitude - lastPlayerPosition.Longitude);
+                    rect.turn(angle);
+                }
+                lastPlayerPosition = e.Position.Location;
+                rect.Visibility = Visibility.Visible;
             }
-            lastPlayerPosition = e.Position.Location;
-            rect.Visibility = Visibility.Visible;
         }
 
         private void turnPlayer(double angle)
@@ -260,10 +263,14 @@ namespace RealityPacman
         {
             base.OnNavigatedTo(e);
 
-            int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
-            _engine.Difficulty = (Difficulty)difficultyInt;
-            _engine.Start();
-            _watcher.Start();
+            // Only start a new game if pushing this page for the first time
+            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.New)
+            {
+                int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
+                _engine.Difficulty = (Difficulty)difficultyInt;
+                _engine.Start();
+                _watcher.Start();
+            }
         }
     }
 }
