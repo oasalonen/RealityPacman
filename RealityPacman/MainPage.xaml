@@ -120,7 +120,7 @@
               Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
               Height="{Binding ElementName=mapCanvas, Path=ActualHeight}"
               Background="Black"
-              Opacity="0.6"
+              Opacity="0.7"
               Visibility="Collapsed">
             
             <Grid.Projection>
@@ -143,7 +143,7 @@
             <TextBlock Grid.Row="1" 
                        Grid.ColumnSpan="2"
                        HorizontalAlignment="Center"
-                       Text="Going back will end the game. Proceed?"
+                       Text="Are you sure you want to go back? This will end the game."
                        TextWrapping="Wrap"
                        Style="{StaticResource PhoneTextLargeStyle}"
                        Margin="0, 20, 0, 20"/>

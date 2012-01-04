@@ -18,6 +18,7 @@ namespace RealityPacman
     public partial class GpsStatusControl : UserControl
     {
         private DispatcherTimer _animationTimer;
+        private int _frameCount = 0;
         private int _frame = 0;
         private int _delta = 1;
 
@@ -27,6 +28,7 @@ namespace RealityPacman
             get { return _gpsStatus; }
             set
             {
+                _frame = 0;
                 _gpsStatus = value;
                 Canvas.SetLeft(sprite, 0);
 
@@ -34,15 +36,18 @@ namespace RealityPacman
                 {
                     case GeoPositionStatus.Disabled:
                         sprite.Source = new BitmapImage(new Uri("satellite-disabled.png", UriKind.RelativeOrAbsolute));
+                        _frameCount = 0;
                         _animationTimer.Stop();
                         break;
                     case GeoPositionStatus.Initializing:
                     case GeoPositionStatus.NoData:
                         sprite.Source = new BitmapImage(new Uri("satellite-sprite.png", UriKind.RelativeOrAbsolute));
+                        _frameCount = 11;
                         _animationTimer.Start();
                         break;
                     case GeoPositionStatus.Ready:
                         sprite.Source = new BitmapImage(new Uri("satellite-ready.png", UriKind.RelativeOrAbsolute));
+                        _frameCount = 0;
                         _animationTimer.Stop();
                         break;
                 }
@@ -60,8 +65,13 @@ namespace RealityPacman
 
         void animationTimer_Tick(object sender, EventArgs e)
         {
+            if (_frameCount == 0)
+            {
+                return;
+            }
+
             _frame += _delta;
-            if (_frame == 10)
+            if (_frame == _frameCount - 1)
             {
                 _delta = -1;
             }
