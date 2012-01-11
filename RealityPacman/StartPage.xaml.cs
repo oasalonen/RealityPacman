@@ -20,54 +20,31 @@ namespace RealityPacman
         {
             InitializeComponent();
 
-            InstructionText.Text = "Escape the ghosts on the map by moving your legs. Yes, you need to go outside to play this game." +
-                "\r\n\r\nMind your surroundings while playing. Cars heading your way are not indicated on the map!";
+            newGameControl.Difficulty = App.Settings.PreferredDifficulty;
+            newGameControl.newGameRequested += new NewGameControl.NewGameRequested(newGameRequested);
+            newGameControl.difficultyChanged += new NewGameControl.DifficultyChanged(difficultyChanged);
 
             ScoresPanoramaItem.DataContext = App.ViewModel;
-            startAnimation.Begin();
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+        private void newGameRequested(Game.Difficulty difficulty)
         {
-            startAnimation.Stop();
-
-            Game.Difficulty difficulty;
-            if (easyButton.IsChecked.Value)
-            {
-                difficulty = Game.Difficulty.Easy;
-            }
-            else if (mediumButton.IsChecked.Value)
-            {
-                difficulty = Game.Difficulty.Medium;
-            }
-            else
-            {
-                difficulty = Game.Difficulty.Hard;
-            }
-
-            App.Settings.PreferredDifficulty = difficulty;
             NavigationService.Navigate(new Uri("/MainPage.xaml?difficulty=" + (int)difficulty, UriKind.Relative));
         }
 
-        private void easyButton_Checked(object sender, RoutedEventArgs e)
+        private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            SetScoresDifficultyLabel("with easy difficulty");
-            SetScoreListBinding("EasySessions");
-            NoScoresLabel.Visibility = (App.ViewModel.EasySessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+            NavigationService.Navigate(new Uri("/NewGamePage.xaml", UriKind.Relative));
         }
 
-        private void mediumButton_Checked(object sender, RoutedEventArgs e)
+        private void myScoresButton_Click(object sender, RoutedEventArgs e)
         {
-            SetScoresDifficultyLabel("with medium difficulty");
-            SetScoreListBinding("MediumSessions");
-            NoScoresLabel.Visibility = (App.ViewModel.MediumSessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+
         }
 
-        private void hardButton_Checked(object sender, RoutedEventArgs e)
+        private void instructionsButton_Click(object sender, RoutedEventArgs e)
         {
-            SetScoresDifficultyLabel("with hard difficulty");
-            SetScoreListBinding("HardSessions");
-            NoScoresLabel.Visibility = (App.ViewModel.HardSessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+            NavigationService.Navigate(new Uri("/HelpPage.xaml", UriKind.Relative));
         }
 
         private void SetScoresDifficultyLabel(string difficulty)
@@ -91,18 +68,7 @@ namespace RealityPacman
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            switch (App.Settings.PreferredDifficulty)
-            {
-                case Game.Difficulty.Easy:
-                    easyButton.IsChecked = true;
-                    break;
-                case Game.Difficulty.Medium:
-                    mediumButton.IsChecked = true;
-                    break;
-                case Game.Difficulty.Hard:
-                    hardButton.IsChecked = true;
-                    break;
-            }
+            newGameControl.Difficulty = App.Settings.PreferredDifficulty;
             base.OnNavigatedTo(e);
         }
 
@@ -110,10 +76,33 @@ namespace RealityPacman
         {
             if (e.AddedItems.Contains(newGamePanoramItem))
             {
-                startAnimation.Begin();
+                newGameControl.Animate();
             }
         }
 
+        private void difficultyChanged(Game.Difficulty difficulty)
+        {
+            App.Settings.PreferredDifficulty = difficulty;
+
+            switch (difficulty)
+            {
+                case Game.Difficulty.Easy:
+                    SetScoresDifficultyLabel("with easy difficulty");
+                    SetScoreListBinding("EasySessions");
+                    NoScoresLabel.Visibility = (App.ViewModel.EasySessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+                case Game.Difficulty.Medium:
+                    SetScoresDifficultyLabel("with medium difficulty");
+                    SetScoreListBinding("MediumSessions");
+                    NoScoresLabel.Visibility = (App.ViewModel.MediumSessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+                case Game.Difficulty.Hard:
+                    SetScoresDifficultyLabel("with hard difficulty");
+                    SetScoreListBinding("HardSessions");
+                    NoScoresLabel.Visibility = (App.ViewModel.HardSessions.Count == 0) ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+            }
+        }
     }
 
     public class DurationFormatter : IValueConverter
