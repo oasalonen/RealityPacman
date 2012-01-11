@@ -39,7 +39,7 @@ namespace RealityPacman
 
         private void myScoresButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/HighScoresPage.xaml", UriKind.Relative));
         }
 
         private void instructionsButton_Click(object sender, RoutedEventArgs e)
