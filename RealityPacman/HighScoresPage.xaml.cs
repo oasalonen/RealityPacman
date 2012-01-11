@@ -18,6 +18,8 @@ namespace RealityPacman
         public HighScoresPage()
         {
             InitializeComponent();
+            HighScoresControl.DataContext = App.ViewModel;
+            HighScoresControl.SetDifficulty(Game.Difficulty.Easy);
         }
     }
 }
