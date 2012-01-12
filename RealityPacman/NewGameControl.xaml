@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:uc="clr-namespace:RealityPacman"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -16,13 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <toolkit:ListPicker x:Name="DifficultyPicker" 
-                                        Grid.Row="0"
-                                        Margin="10,0,10,0"
-                                        Header="difficulty" 
-                                        ItemsSource="{Binding}"
-                                        Style="{StaticResource pickerStyle}"
-                                        SelectionChanged="DifficultyPicker_SelectionChanged"/>
+        <uc:DifficultyPickerControl x:Name="DifficultyPicker" Grid.Row="0" Margin="10,0,10,0"/>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <StackPanel.Resources>
