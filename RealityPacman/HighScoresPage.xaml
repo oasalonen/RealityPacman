@@ -28,9 +28,10 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <uc:DifficultyPickerControl x:Name="DifficultyPicker" />
             <uc:HighScoresControl x:Name="HighScoresControl" />
-        </Grid>
+        </StackPanel>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

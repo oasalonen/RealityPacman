@@ -26,19 +26,19 @@
         </StackPanel.Resources>
 
         <TextBlock Text="with easy difficulty"
-                               x:Name="ScoresDifficultyLabel"
-                               Style="{StaticResource PhoneTextLargeStyle}"
-                               Margin="10,0,0,0"/>
+                   x:Name="ScoresDifficultyLabel"
+                   Style="{StaticResource PhoneTextLargeStyle}"
+                   Margin="10,0,0,0"/>
         <ListBox x:Name="ScoresList" 
-                             ItemsSource="{Binding EasySessions}" 
-                             ItemTemplate="{StaticResource ScoresListItemTemplate}"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch"
-                             Margin="0,20,0,0" />
+                 ItemsSource="{Binding EasySessions}" 
+                 ItemTemplate="{StaticResource ScoresListItemTemplate}"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 Margin="0,20,0,0" />
         <TextBlock x:Name="NoScoresLabel"
-                               Text="no scores yet" 
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource PhoneTextSubtleStyle}"/>
+                 Text="no scores yet" 
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Style="{StaticResource PhoneTextSubtleStyle}"/>
     </StackPanel>
 </UserControl>

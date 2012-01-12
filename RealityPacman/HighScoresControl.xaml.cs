@@ -49,6 +49,11 @@ namespace RealityPacman
             }
         }
 
+        public void SetDifficultyLabelVisibility(Visibility visibility)
+        {
+            ScoresDifficultyLabel.Visibility = visibility;
+        }
+
         private void SetScoreListBinding(string sessions)
         {
             if (ScoresList != null)

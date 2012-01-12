@@ -25,6 +25,7 @@ namespace RealityPacman
             newGameControl.difficultyChanged += new NewGameControl.DifficultyChanged(difficultyChanged);
 
             ScoresPanoramaItem.DataContext = App.ViewModel;
+            highScoresControl.SetDifficultyLabelVisibility(Visibility.Visible);
         }
 
         private void newGameRequested(Game.Difficulty difficulty)

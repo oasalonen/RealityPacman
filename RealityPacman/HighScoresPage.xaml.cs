@@ -18,6 +18,10 @@ namespace RealityPacman
         public HighScoresPage()
         {
             InitializeComponent();
+
+            DifficultyPicker.difficultyChanged += new DifficultyPickerControl.DifficultySelectionChanged(x => HighScoresControl.SetDifficulty(x));
+
+            HighScoresControl.SetDifficultyLabelVisibility(Visibility.Collapsed);
             HighScoresControl.DataContext = App.ViewModel;
             HighScoresControl.SetDifficulty(Game.Difficulty.Easy);
         }
