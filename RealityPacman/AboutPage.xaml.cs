@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using Microsoft.Phone.Info;
 
 namespace RealityPacman
 {
@@ -32,6 +33,11 @@ namespace RealityPacman
             EmailComposeTask email = new EmailComposeTask();
             email.To = ContactEmail;
             email.Subject = "About Ghost Maps";
+            email.Body += 
+                "\n\nApplication: Ghost Maps v." + AppVersion +
+                "\nDevice: " + DeviceStatus.DeviceManufacturer + " " + DeviceStatus.DeviceName +
+                "\nFirmware: " + DeviceStatus.DeviceFirmwareVersion +
+                "\nHardware: " + DeviceStatus.DeviceHardwareVersion;
             email.Show();
         }
     }
