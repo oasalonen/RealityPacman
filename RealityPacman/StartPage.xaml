@@ -31,7 +31,7 @@
                     <HyperlinkButton Content="my scores" Style="{StaticResource plainHyperlinkStyle}" Click="myScoresButton_Click"/>
                     <HyperlinkButton Content="settings" Style="{StaticResource plainHyperlinkStyle}" />
                     <HyperlinkButton Content="instructions" Style="{StaticResource plainHyperlinkStyle}" Click="instructionsButton_Click" />
-                    <HyperlinkButton Content="about" Style="{StaticResource plainHyperlinkStyle}" />
+                    <HyperlinkButton Content="about" Style="{StaticResource plainHyperlinkStyle}" Click="aboutButton_Click" />
                 </StackPanel>
             </controls:PanoramaItem>
 

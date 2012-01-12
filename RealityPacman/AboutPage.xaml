@@ -1,0 +1,149 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="RealityPacman.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="Ghost Maps" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="about" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Row="0" 
+                               Grid.Column="0" 
+                               Margin="12,0,20,0"
+                               FontSize="{StaticResource PhoneFontSizeNormal}"
+                               Text="Version:"/>
+                    <TextBlock Grid.Row="0" 
+                               Grid.Column="1" 
+                               x:Name="VersionField" 
+                               FontSize="{StaticResource PhoneFontSizeNormal}"
+                               Foreground="{StaticResource PhoneAccentBrush}" 
+                               Text="0.5.0"/>
+                    
+                    <TextBlock Grid.Row="1" 
+                               Grid.Column="0" 
+                               Margin="12,0,20,0" 
+                               Text="Contact:"/>
+                    <HyperlinkButton Grid.Row="1" 
+                                     Grid.Column="1"
+                                     x:Name="EmailContactButton"
+                                     HorizontalContentAlignment="Left"
+                                     Margin="-12,0,0,0"
+                                     FontSize="{StaticResource PhoneFontSizeNormal}"
+                                     Foreground="{StaticResource PhoneAccentBrush}" 
+                                     Content="oasalonen@gmail.com"
+                                     Click="emailContact_Click"/>
+
+                    <RichTextBox Grid.Row="2" 
+                                 Grid.ColumnSpan="2"
+                                 Margin="0,30,0,0"
+                                 VerticalContentAlignment="Top" 
+                                 TextWrapping="Wrap">
+                        <Paragraph xml:space="preserve">The original version was coded in a <Hyperlink Foreground="{StaticResource PhoneAccentBrush}" NavigateUri="http://www.futurice.com" TargetName="_futurice">Futurice</Hyperlink> Windows Phone 7 hackathon event by first-time WP7 coders on October 7, 2011.</Paragraph>
+                        <Paragraph/>
+                        <Paragraph FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+                                   Foreground="{StaticResource PhoneAccentBrush}">
+                            Original authors
+                        </Paragraph>
+                        <Paragraph>
+                            Olli Salonen 
+                            <Run Foreground="{StaticResource PhoneDisabledBrush}" Text="   oasalonen@gmail.com"/></Paragraph>
+                        <Paragraph>
+                            Olli Mahlamäki 
+                            <Run Foreground="{StaticResource PhoneDisabledBrush}" Text="   olli.mahlamaki@gmail.com"/></Paragraph>
+                        <Paragraph>
+                            Martin Richter
+                            <Run Foreground="{StaticResource PhoneDisabledBrush}" Text="   me@martinrichter.net"/></Paragraph>
+                        <Paragraph>
+                            Christoph Podkowik
+                            <Run Foreground="{StaticResource PhoneDisabledBrush}" Text="   christoph@gmail.com"/>
+                        </Paragraph>
+                        <Paragraph>
+                            Timo Tuominen
+                        </Paragraph>
+                        <Paragraph/>
+                        <Paragraph FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+                                   Foreground="{StaticResource PhoneAccentBrush}">
+                            Copyright notices
+                        </Paragraph>
+                        <Paragraph FontSize="14">
+                            Copyright (c) 2011, Olli Salonen, Olli Mahlamäki,
+                              Martin Richter, Christoph Podkowik, Timo Tuominen
+                            <LineBreak/>
+                            All rights reserved.
+                        </Paragraph>
+                        <Paragraph/>
+                        <Paragraph FontSize="14">
+                            Redistribution and use in source and binary forms, with or
+                            without modification, are permitted provided that the following
+                            conditions are met:
+                        </Paragraph>
+                        <Paragraph/>
+                        <Paragraph FontSize="14">
+                            Redistributions of source code must retain the above
+                            copyright notice, this list of conditions and the
+                            following disclaimer.
+                        </Paragraph>
+                        <Paragraph/>
+                        <Paragraph FontSize="14">
+                            Redistributions in binary form must reproduce the above
+                            copyright notice, this list of conditions and the following
+                            disclaimer in the documentation and/or other materials
+                            provided with the distribution.
+                        </Paragraph>
+                        <Paragraph/>
+                        <Paragraph FontSize="14">
+                            THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+                            CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+                            INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+                            MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+                            DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+                            CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+                            SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+                            NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+                            LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+                            CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+                            STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+                            ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+                            ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                        </Paragraph>
+                    </RichTextBox>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+ 
+</phone:PhoneApplicationPage>

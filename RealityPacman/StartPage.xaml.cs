@@ -48,6 +48,11 @@ namespace RealityPacman
             NavigationService.Navigate(new Uri("/HelpPage.xaml", UriKind.Relative));
         }
 
+        private void aboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             newGameControl.Difficulty = App.Settings.PreferredDifficulty;
