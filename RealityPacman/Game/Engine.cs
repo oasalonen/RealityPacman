@@ -52,10 +52,12 @@ namespace RealityPacman.Game
                 {
                     Player.Position = value;
                 }
+#if false // Disable storing of start location because privacy issues are not handled yet
                 if (Session != null && Session.StartCoordinate.IsUnknown)
                 {
                     Session.StartCoordinate = value;
                 }
+#endif
             }
         }
 
