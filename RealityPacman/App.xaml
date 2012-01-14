@@ -59,7 +59,7 @@
 
         <!--Nicer picker style-->
         <Style TargetType="toolkit:ListPicker" x:Key="pickerStyle">
-            <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
