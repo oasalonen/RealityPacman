@@ -16,17 +16,19 @@ namespace RealityPacman
     public partial class PacMan : UserControl
     {
         private DispatcherTimer animTimer;
-        private int frame = 1;
+        private int frame = 0;
         private int delta = 1;
 
         public PacMan()
         {
             InitializeComponent();
+#if false // Disable animation, indicator is no longer a sprite
             animTimer = new DispatcherTimer();
             animTimer.Interval = TimeSpan.FromMilliseconds(50);
             animTimer.Tick += new EventHandler(animTimer_Tick);
 
             animTimer.Start();
+#endif
         }
 
         public void turn(double angle)
@@ -38,7 +40,7 @@ namespace RealityPacman
         {
             // First and last frame of sprite have white background, skip those frames
             frame = frame + delta;
-            if (frame == 9)
+            if (frame == 10)
                 delta = -1;
             else if (frame == 1)
                 delta = 1;

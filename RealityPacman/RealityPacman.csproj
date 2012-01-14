@@ -209,11 +209,11 @@
     <Resource Include="ghost_anim_row-01.png" />
     <Resource Include="eyes.png" />
     <Resource Include="ghost_background.png" />
-    <Resource Include="man_anim_row-01.png" />
     <Resource Include="fruit.png" />
     <Resource Include="satellite-sprite.png" />
     <Resource Include="satellite-disabled.png" />
     <Resource Include="satellite-ready.png" />
+    <Resource Include="position_indicator.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
