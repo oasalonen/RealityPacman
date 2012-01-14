@@ -90,7 +90,8 @@
                              Canvas.Top="0"
                              Canvas.Left="0"
                              Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
-                             Opacity="0.70"/>
+                             Opacity="0.70"
+                             Tap="gpsStatusBox_Tap"/>
         
         <Grid x:Name="endGamePrompt"
               Canvas.Top="0"

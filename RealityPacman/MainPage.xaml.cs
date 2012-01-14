@@ -265,5 +265,17 @@ namespace RealityPacman
                 _watcher.Start();
             }
         }
+
+        private void gpsStatusBox_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (gpsStatusBox.Status == GeoPositionStatus.Disabled)
+            {
+                NavigationService.Navigate(new Uri("/GpsHelpPage.xaml?helpTopic=disabledPositioning", UriKind.Relative));
+            }
+            else if (gpsStatusBox.Status == GeoPositionStatus.NoData)
+            {
+                NavigationService.Navigate(new Uri("/GpsHelpPage.xaml?helpTopic=noPosition", UriKind.Relative));
+            }
+        }
     }
 }

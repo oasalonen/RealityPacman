@@ -89,6 +89,9 @@
     <Compile Include="GhostControl.xaml.cs">
       <DependentUpon>GhostControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GpsHelpPage.xaml.cs">
+      <DependentUpon>GpsHelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GpsStatusControl.xaml.cs">
       <DependentUpon>GpsStatusControl.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GhostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GpsHelpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
