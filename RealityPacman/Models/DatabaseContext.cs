@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using Microsoft.Phone.Data.Linq;
 
 namespace RealityPacman.Models
 {
@@ -197,5 +198,41 @@ namespace RealityPacman.Models
         public DatabaseContext(string connectionString) : base(connectionString) { }
 
         public Table<SessionModel> Sessions;
+
+        public void SetDatabaseVersion(int version)
+        {
+            DatabaseSchemaUpdater updater = this.CreateDatabaseSchemaUpdater();
+            updater.DatabaseSchemaVersion = version;
+            updater.Execute();
+        }
+
+        public void MigrateDatabase(int newVersion)
+        {
+            /**
+             * How to migrate: 
+             * 
+             * - Create a new column with the CanBeNull attribute.
+             * - When using base types such as int, make it nullable.
+             * - Increment the DatabaseVersion field in App.xaml.cs.
+             * - Enable the code block below and add a new case with the old version
+             * - and add the corresponding column. The first one is left as an example.
+             */
+#if false
+            DatabaseSchemaUpdater updater = this.CreateDatabaseSchemaUpdater();
+            int oldVersion = updater.DatabaseSchemaVersion;
+
+            while (oldVersion < newVersion)
+            {
+                switch (oldVersion)
+                {
+                    case 1:
+                        updater.AddColumn<SessionModel>("NAME OF COLUMN HERE");
+                        break;
+                }
+                updater.DatabaseSchemaVersion = ++oldVersion;
+                updater.Execute();
+            }
+#endif
+        }
     }
 }

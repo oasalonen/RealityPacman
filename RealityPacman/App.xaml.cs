@@ -26,6 +26,8 @@ namespace RealityPacman
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
+        public const int DatabaseVersion = 1;
+
         public static AppSettings Settings { get; set; }
 
         private static SessionViewModel _viewModel;
@@ -97,27 +99,30 @@ namespace RealityPacman
 
             Settings = new AppSettings();
 
-            string dbConnectionString = "Data Source=isostore:/RealityPacman.sdf";
+            string dbConnectionString = "Data Source=isostore:/GhostMaps.sdf";
             using (DatabaseContext db = new DatabaseContext(dbConnectionString))
             {
                 if (!db.DatabaseExists())
                 {
                     db.CreateDatabase();
-                    for (int i = 0; i < 30; i++)
-                    {
-                        Int64 longI = i;
-                        db.Sessions.InsertOnSubmit(new SessionModel { StartTime = new DateTime(2012, 1, 1, 0, 0, 0),
-                                                                      EndTime = new DateTime(2012, 1, 1, 1, 0, 0),
-                                                                      Duration = 1000 * 15 * longI, 
-                                                                      Difficulty = i % 3 });
-                    }
+                    db.SetDatabaseVersion(DatabaseVersion);
+                    //for (int i = 0; i < 30; i++)
+                    //{
+                    //    Int64 longI = i;
+                    //    db.Sessions.InsertOnSubmit(new SessionModel
+                    //    {
+                    //        StartTime = new DateTime(2012, 1, 1, 0, 0, 0),
+                    //        EndTime = new DateTime(2012, 1, 1, 1, 0, 0),
+                    //        Duration = 1000 * 15 * longI,
+                    //        Difficulty = i % 3
+                    //    });
+                    //}
                     db.SubmitChanges();
                 }
-                //else
-                //{
-                //    db.DeleteDatabase();
-                //    db.CreateDatabase();
-                //}
+                else
+                {
+                    db.MigrateDatabase(DatabaseVersion);
+                }
             }
 
             _viewModel = new SessionViewModel(dbConnectionString);
