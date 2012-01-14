@@ -103,18 +103,21 @@ namespace RealityPacman
                 if (!db.DatabaseExists())
                 {
                     db.CreateDatabase();
-                    //for (int i = 0; i < 30; i++)
-                    //{
-                    //    Int64 longI = i;
-                    //    db.Sessions.InsertOnSubmit(new SessionModel { Duration = 1000000000 * longI, Difficulty = i % 3 });
-                    //}
-                    //db.SubmitChanges();
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Int64 longI = i;
+                        db.Sessions.InsertOnSubmit(new SessionModel { StartTime = new DateTime(2012, 1, 1, 0, 0, 0),
+                                                                      EndTime = new DateTime(2012, 1, 1, 1, 0, 0),
+                                                                      Duration = 1000 * 15 * longI, 
+                                                                      Difficulty = i % 3 });
+                    }
+                    db.SubmitChanges();
                 }
-                else
-                {
-                    db.DeleteDatabase();
-                    db.CreateDatabase();
-                }
+                //else
+                //{
+                //    db.DeleteDatabase();
+                //    db.CreateDatabase();
+                //}
             }
 
             _viewModel = new SessionViewModel(dbConnectionString);

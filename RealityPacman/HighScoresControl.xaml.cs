@@ -70,7 +70,7 @@ namespace RealityPacman
     {
         public object Convert(object value, Type targetType, object paramter, System.Globalization.CultureInfo cultureInfo)
         {
-            TimeSpan duration = new TimeSpan(0, 0, 0, 0, (int)value);
+            TimeSpan duration = TimeSpan.FromMilliseconds((long)value);
 
             string durationString = "";
             if (duration.Days >= 1.0)

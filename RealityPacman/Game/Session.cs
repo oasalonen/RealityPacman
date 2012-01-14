@@ -43,7 +43,7 @@ namespace RealityPacman.Game
 
         public void AddDuration(int milliseconds)
         {
-            Duration += new TimeSpan(0, 0, 0, 0, milliseconds);
+            Duration.Add(TimeSpan.FromMilliseconds(milliseconds));
         }
     }
 }

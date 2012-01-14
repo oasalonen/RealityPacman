@@ -43,9 +43,9 @@ namespace RealityPacman.Models
             }
         }
 
-        private int _duration;
+        private long _duration;
         [Column]
-        public int Duration
+        public long Duration
         {
             get { return _duration; }
             set
