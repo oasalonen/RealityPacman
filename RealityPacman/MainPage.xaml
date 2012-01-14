@@ -45,6 +45,32 @@
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
+
+            <!-- GPS label hide animation -->
+            <Storyboard x:Name="gpsHideAnimation">
+                <DoubleAnimationUsingKeyFrames
+                    Storyboard.TargetName="gpsStatusBox"
+                    Storyboard.TargetProperty="(Canvas.Top)">
+                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
+                    <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
+                    <EasingDoubleKeyFrame Value="-100" KeyTime="0:0:6">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <ExponentialEase Exponent="3" EasingMode="EaseOut" />
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Name="gpsShowAnimation">
+                <DoubleAnimation
+                        From="-100" To="0" Duration="0:0:1"
+                        Storyboard.TargetName="gpsStatusBox"
+                        Storyboard.TargetProperty="(Canvas.Top)"
+                        >
+                    <DoubleAnimation.EasingFunction>
+                        <ExponentialEase Exponent="3" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
         </Canvas.Resources>
         
         <my:Map Name="map" 
@@ -60,59 +86,11 @@
             </my:MapLayer>
         </my:Map>
 
-        <Grid x:Name="gpsStatusBox"
-              Canvas.Top="0"
-              Canvas.Left="0"
-              Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
-              Background="{StaticResource PhoneBackgroundBrush}"
-              Opacity="0.70">
-            
-            <!-- GPS label hide animation -->
-            <Grid.Resources>
-                <Storyboard x:Name="gpsHideAnimation">
-                    <DoubleAnimationUsingKeyFrames
-                        Storyboard.TargetName="gpsStatusBox"
-                        Storyboard.TargetProperty="(Canvas.Top)">
-                        <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0" />
-                        <LinearDoubleKeyFrame Value="0" KeyTime="0:0:5" />
-                        <EasingDoubleKeyFrame Value="-100" KeyTime="0:0:6">
-                            <EasingDoubleKeyFrame.EasingFunction>
-                                <ExponentialEase Exponent="3" EasingMode="EaseOut" />
-                            </EasingDoubleKeyFrame.EasingFunction>
-                        </EasingDoubleKeyFrame>
-                    </DoubleAnimationUsingKeyFrames>
-                </Storyboard>
-                <Storyboard x:Name="gpsShowAnimation">
-                    <DoubleAnimation
-                            From="-100" To="0" Duration="0:0:1"
-                            Storyboard.TargetName="gpsStatusBox"
-                            Storyboard.TargetProperty="(Canvas.Top)"
-                            >
-                        <DoubleAnimation.EasingFunction>
-                            <ExponentialEase Exponent="3" EasingMode="EaseOut" />
-                        </DoubleAnimation.EasingFunction>
-                    </DoubleAnimation>
-                </Storyboard>
-            </Grid.Resources>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="64" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            
-            <!-- GPS label contents -->
-            <uc:GpsStatusControl x:Name="gpsStatusImage" 
-                                 Grid.Row="0"
-                                 Grid.Column="0"/>
-            <TextBlock x:Name="gpsStatusLabel"
-                       Grid.Row="0"
-                       Grid.Column="1"
-                       Text="Getting a GPS fix" 
-                       VerticalAlignment="Center"/>
-        </Grid>
+        <uc:GpsStatusControl x:Name="gpsStatusBox"
+                             Canvas.Top="0"
+                             Canvas.Left="0"
+                             Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
+                             Opacity="0.70"/>
         
         <Grid x:Name="endGamePrompt"
               Canvas.Top="0"

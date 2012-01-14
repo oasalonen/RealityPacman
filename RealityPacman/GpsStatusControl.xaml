@@ -7,13 +7,32 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
-    
-    <Canvas Width="64"
-            Height="64">
-        <Canvas.Clip>
-            <RectangleGeometry Rect="0,0,63,63" />
-        </Canvas.Clip>
-        <Image x:Name="sprite" Source="/RealityPacman;component/satellite-sprite.png" />
-    </Canvas>
+    d:DesignHeight="80" d:DesignWidth="480">
+
+    <Grid Background="{StaticResource PhoneBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- GPS label contents -->
+        <Canvas x:Name="gpsStatusImage"
+                Width="64"
+                Height="64"
+                Grid.Row="0"
+                Grid.Column="0">
+            <Canvas.Clip>
+                <RectangleGeometry Rect="0,0,63,63" />
+            </Canvas.Clip>
+            <Image x:Name="sprite" Source="/RealityPacman;component/satellite-sprite.png" />
+        </Canvas>
+        <TextBlock x:Name="gpsStatusLabel"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Text="Getting a GPS fix" 
+                   VerticalAlignment="Center"/>
+    </Grid>
 </UserControl>

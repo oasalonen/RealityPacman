@@ -129,24 +129,20 @@ namespace RealityPacman
 
         void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            gpsStatusImage.Status = e.Status;
+            gpsStatusBox.Status = e.Status;
 
             switch (e.Status)
             {
                 case GeoPositionStatus.Disabled:
-                    gpsStatusLabel.Text = "Please enable positioning on this device";
                     setGpsStatusBarVisibility(Visibility.Visible);
                     break;
                 case GeoPositionStatus.Initializing:
-                    gpsStatusLabel.Text = "Looking for your position";
                     setGpsStatusBarVisibility(Visibility.Visible);
                     break;
                 case GeoPositionStatus.NoData:
-                    gpsStatusLabel.Text = "Looking for your position";
                     setGpsStatusBarVisibility(Visibility.Visible);
                     break;
                 case GeoPositionStatus.Ready:
-                    gpsStatusLabel.Text = "Position acquired";
                     setGpsStatusBarVisibility(Visibility.Collapsed);
                     break;
             }
