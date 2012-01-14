@@ -99,6 +99,12 @@ namespace RealityPacman.Game
 
         public void Start()
         {
+            if (_gameTimer.IsEnabled)
+            {
+                // Game is already running
+                return;
+            }
+
             Ghosts.Clear();
 
             Session = new Session();

@@ -165,6 +165,9 @@ namespace RealityPacman
                 }
                 lastPlayerPosition = e.Position.Location;
                 rect.Visibility = Visibility.Visible;
+
+                // Only start engine when getting the first location
+                _engine.Start();
             }
         }
 
@@ -261,7 +264,6 @@ namespace RealityPacman
             {
                 int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
                 _engine.Difficulty = (Difficulty)difficultyInt;
-                _engine.Start();
                 _watcher.Start();
             }
         }
