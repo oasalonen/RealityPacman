@@ -64,7 +64,7 @@
               Canvas.Top="0"
               Canvas.Left="0"
               Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
-              Background="Black"
+              Background="{StaticResource PhoneBackgroundBrush}"
               Opacity="0.70">
             
             <!-- GPS label hide animation -->
@@ -119,7 +119,7 @@
               Canvas.Left="0"
               Width="{Binding ElementName=mapCanvas, Path=ActualWidth}"
               Height="{Binding ElementName=mapCanvas, Path=ActualHeight}"
-              Background="Black"
+              Background="{StaticResource PhoneBackgroundBrush}"
               Opacity="0.7"
               Visibility="Collapsed">
             
