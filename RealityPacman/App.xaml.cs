@@ -42,8 +42,16 @@ namespace RealityPacman
                 Settings.IsIdleRunningEnabled = value;
                 if (!value)
                 {
-                    PhoneApplicationService.Current.ApplicationIdleDetectionMode = IdleDetectionMode.Enabled;
-                    PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Enabled;
+                    try
+                    {
+                        PhoneApplicationService.Current.ApplicationIdleDetectionMode = IdleDetectionMode.Enabled;
+                        PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Enabled;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        MessageBox.Show("Removing the permission to run while idle or locked requires an application restart before the setting takes effect.", 
+                            "Application restart required", MessageBoxButton.OK);
+                    }
                 }
                 else
                 {
@@ -114,7 +122,6 @@ namespace RealityPacman
 
             RootFrame.Obscured += new EventHandler<ObscuredEventArgs>(RootFrame_Obscured);
             RootFrame.Unobscured += new EventHandler(RootFrame_Unobscured);
-            IsIdleRunningEnabled = true;
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -125,6 +132,10 @@ namespace RealityPacman
             if (Settings.IsDisclaimerAccepted == false)
             {
                 uri = new Uri("/DisclaimerPage.xaml", UriKind.Relative);
+            }
+            else if (Settings.IsPermissionPageShown == false)
+            {
+                uri = new Uri("/PermissionsPage.xaml", UriKind.Relative);
             }
             else
             {

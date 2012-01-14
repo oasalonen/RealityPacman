@@ -12,14 +12,28 @@
     d:DesignHeight="480" d:DesignWidth="480">
 
     <Grid>
+        <Grid.Resources>
+            <uc:LocationAccessVisibilityConverter x:Key="LocationAccessVisibilityConverter"/>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <uc:DifficultyPickerControl x:Name="DifficultyPicker" Grid.Row="0" Margin="10,0,10,0"/>
 
-        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <TextBlock Grid.Row="1" 
+                   VerticalAlignment="Bottom" 
+                   Margin="10,0,10,0" 
+                   Style="{StaticResource PhoneTextSubtleStyle}"
+                   TextWrapping="Wrap"
+                   Visibility="{Binding Path=IsLocationAccessAllowed, Converter={StaticResource LocationAccessVisibilityConverter}}"
+                   >
+            Please enable location access in the game settings menu in order to play the game.
+        </TextBlock>
+        
+        <StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <StackPanel.Resources>
                 <Storyboard x:Name="StartAnimation">
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="startProjection"
@@ -41,10 +55,11 @@
                 </Storyboard>
             </StackPanel.Resources>
             <Button x:Name="StartButton"
-                                Content="start game" 
-                                Margin="0,0,0,20"
-                                Click="StartButton_Click"
-                                FontSize="{StaticResource PhoneFontSizeLarge}">
+                    Content="start game" 
+                    Margin="0,0,0,20"
+                    Click="StartButton_Click"
+                    FontSize="{StaticResource PhoneFontSizeLarge}"
+                    IsEnabled="{Binding IsLocationAccessAllowed}">
                 <Button.Projection>
                     <PlaneProjection x:Name="startProjection" RotationY="0" />
                 </Button.Projection>

@@ -9,21 +9,25 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.IO.IsolatedStorage;
+using System.ComponentModel;
 
 namespace RealityPacman
 {
-    public class AppSettings
+    public class AppSettings : INotifyPropertyChanged
     {
         private IsolatedStorageSettings _settings;
         private const string PreferredDifficultySettingName = "PreferredDifficultySetting";
         private const string IsDisclaimerAcceptedSettingName = "IsDisclaimerAcceptedSetting";
+        private const string IsPermissionPageShownSettingName = "IsPermissionPageShownSetting";
         private const string IsIdleRunningEnabledSettingName = "IsIdleRunningEnabledSetting";
+        private const string IsLocationAccessAllowedSettingName = "IsLocationAccessAllowedSetting";
 
         public AppSettings()
         {
             _settings = IsolatedStorageSettings.ApplicationSettings;
         }
 
+        #region Settings
         public Game.Difficulty PreferredDifficulty
         {
             get
@@ -33,6 +37,7 @@ namespace RealityPacman
             set
             {
                 SetValue(PreferredDifficultySettingName, value);
+                NotifyPropertyChanged("PreferredDifficulty");
             }
         }
 
@@ -45,6 +50,20 @@ namespace RealityPacman
             set
             {
                 SetValue(IsDisclaimerAcceptedSettingName, value);
+                NotifyPropertyChanged("IsDisclaimerAccepted");
+            }
+        }
+
+        public bool IsPermissionPageShown
+        {
+            get
+            {
+                return GetValue<bool>(IsPermissionPageShownSettingName, false);
+            }
+            set
+            {
+                SetValue(IsPermissionPageShownSettingName, value);
+                NotifyPropertyChanged("IsPermissionPageShown");
             }
         }
 
@@ -57,10 +76,26 @@ namespace RealityPacman
             set
             {
                 SetValue(IsIdleRunningEnabledSettingName, value);
+                NotifyPropertyChanged("IsIdleRunningEnabled");
             }
         }
 
-        public void SetValue(string key, Object value)
+        public bool IsLocationAccessAllowed
+        {
+            get
+            {
+                return GetValue<bool>(IsLocationAccessAllowedSettingName, true);
+            }
+            set
+            {
+                SetValue(IsLocationAccessAllowedSettingName, value);
+                NotifyPropertyChanged("IsLocationAccessAllowed");
+            }
+        }
+        #endregion
+
+        #region Private get/set
+        private void SetValue(string key, Object value)
         {
             if (_settings.Contains(key))
             {
@@ -72,7 +107,7 @@ namespace RealityPacman
             }
         }
 
-        public T GetValue<T>(string key, T defaultValue)
+        private T GetValue<T>(string key, T defaultValue)
         {
             if (_settings.Contains(key))
             {
@@ -83,5 +118,18 @@ namespace RealityPacman
                 return defaultValue;
             }
         }
+        #endregion
+
+        #region PropertyNotification
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 }

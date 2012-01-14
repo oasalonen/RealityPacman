@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="RealityPacman.PermissionSettingsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <StackPanel x:Name="LayoutRoot">
+        <CheckBox x:Name="AllowLocationCheckBox" 
+                  IsChecked="True"
+                  Content="Allow access to device location"/>
+        <TextBlock Margin="30,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap">
+            You need to allow this application access to the device location
+            in order to play the game. The device location will only be used
+            to show your position on the map. This game does not store or share
+            your location with anyone.
+        </TextBlock>
+
+        <CheckBox x:Name="AllowRunningIdleCheckBox" Content="Allow running while locked/idle "/>
+        <TextBlock Margin="30,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap">
+            In order to get the best gaming experience, please allow the
+            game to run while the device is locked or if you have not interacted
+            with the application for a period of time. Leaving this option unchecked
+            will pause the game whenever the screen is locked automatically or manually.
+        </TextBlock>
+    </StackPanel>
+</UserControl>

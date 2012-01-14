@@ -43,6 +43,11 @@ namespace RealityPacman
             NavigationService.Navigate(new Uri("/HighScoresPage.xaml", UriKind.Relative));
         }
 
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
         private void instructionsButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/HelpPage.xaml", UriKind.Relative));
@@ -55,6 +60,7 @@ namespace RealityPacman
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            App.IsIdleRunningEnabled = App.Settings.IsIdleRunningEnabled;
             newGameControl.Difficulty = App.Settings.PreferredDifficulty;
             highScoresControl.SetDifficulty(App.Settings.PreferredDifficulty);
 

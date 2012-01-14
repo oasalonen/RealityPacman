@@ -46,7 +46,7 @@
                 <Run Foreground="{StaticResource PhoneAccentBrush}" Text=" I accept" />,
                 you agree to all these terms.
             </TextBlock>
-            <Button Grid.Row="2" x:Name="acceptButton" Content="I accept" Click="acceptButton_Click"/>
+            <Button Grid.Row="2" x:Name="acceptButton" Margin="0,0,0,20" Content="I accept" Click="acceptButton_Click"/>
         </Grid>
     </Grid>
 

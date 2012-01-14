@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Windows.Data;
 
 namespace RealityPacman
 {
@@ -37,6 +38,7 @@ namespace RealityPacman
             InitializeComponent();
 
             DifficultyPicker.difficultyChanged += new DifficultyPickerControl.DifficultySelectionChanged(DifficultySelectionChanged);
+            this.DataContext = App.Settings;
         }
 
         public void Animate()
@@ -62,4 +64,27 @@ namespace RealityPacman
             }
         }
     }
+
+    #region Converters
+    public class LocationAccessVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool isLocationAllowed = (bool)value;
+            if (isLocationAllowed)
+            {
+                return Visibility.Collapsed;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
 }

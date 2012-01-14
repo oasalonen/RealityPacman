@@ -29,7 +29,7 @@
                 <StackPanel>
                     <HyperlinkButton Content="new game" Style="{StaticResource plainHyperlinkStyle}" Click="newGameButton_Click"/>
                     <HyperlinkButton Content="my scores" Style="{StaticResource plainHyperlinkStyle}" Click="myScoresButton_Click"/>
-                    <HyperlinkButton Content="settings" Style="{StaticResource plainHyperlinkStyle}" />
+                    <HyperlinkButton Content="settings" Style="{StaticResource plainHyperlinkStyle}" Click="settingsButton_Click"/>
                     <HyperlinkButton Content="instructions" Style="{StaticResource plainHyperlinkStyle}" Click="instructionsButton_Click" />
                     <HyperlinkButton Content="about" Style="{StaticResource plainHyperlinkStyle}" Click="aboutButton_Click" />
                 </StackPanel>
