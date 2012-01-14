@@ -102,13 +102,10 @@ namespace RealityPacman
 
         void gameStarted()
         {
-            App.IsIdleModeEnabled = false;
         }
 
         void gameOver(Session session)
         {
-            App.IsIdleModeEnabled = true;
-
             _watcher.Stop();
 
             // Save session to database

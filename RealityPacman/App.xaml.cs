@@ -34,19 +34,20 @@ namespace RealityPacman
             get { return _viewModel; }
         }
 
-        private static bool _isIdleModeEnabled;
-        public static bool IsIdleModeEnabled
+        public static bool IsIdleRunningEnabled
         {
-            get { return _isIdleModeEnabled; }
+            get { return Settings.IsIdleRunningEnabled; }
             set
             {
-                _isIdleModeEnabled = value;
-                if (_isIdleModeEnabled)
+                Settings.IsIdleRunningEnabled = value;
+                if (!value)
                 {
+                    PhoneApplicationService.Current.ApplicationIdleDetectionMode = IdleDetectionMode.Enabled;
                     PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Enabled;
                 }
                 else
                 {
+                    PhoneApplicationService.Current.ApplicationIdleDetectionMode = IdleDetectionMode.Disabled;
                     PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
                 }
             }
@@ -83,7 +84,7 @@ namespace RealityPacman
                 // application's PhoneApplicationService object to Disabled.
                 // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
                 // and consume battery power when the user is not using the phone.
-                PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+                // PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
             Settings = new AppSettings();
@@ -110,6 +111,10 @@ namespace RealityPacman
 
             _viewModel = new SessionViewModel(dbConnectionString);
             _viewModel.Load();
+
+            RootFrame.Obscured += new EventHandler<ObscuredEventArgs>(RootFrame_Obscured);
+            RootFrame.Unobscured += new EventHandler(RootFrame_Unobscured);
+            IsIdleRunningEnabled = true;
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -154,6 +159,14 @@ namespace RealityPacman
                 // A navigation has failed; break into the debugger
                 System.Diagnostics.Debugger.Break();
             }
+        }
+
+        private void RootFrame_Obscured(object sender, EventArgs e)
+        {
+        }
+
+        void RootFrame_Unobscured(object sender, EventArgs e)
+        {
         }
 
         // Code to execute on Unhandled Exceptions
