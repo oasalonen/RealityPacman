@@ -26,7 +26,7 @@ namespace RealityPacman
         private void newGameRequested(Game.Difficulty difficulty)
         {
             App.Settings.PreferredDifficulty = difficulty;
-            NavigationService.Navigate(new Uri("/MainPage.xaml?difficulty=" + (int)difficulty, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Ui/MainPage.xaml?difficulty=" + (int)difficulty, UriKind.Relative));
         }
     }
 }

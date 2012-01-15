@@ -29,7 +29,7 @@ namespace RealityPacman
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
             App.Settings.IsPermissionPageShown = true;
-            NavigationService.Navigate(new Uri("/StartPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Ui/StartPage.xaml", UriKind.Relative));
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

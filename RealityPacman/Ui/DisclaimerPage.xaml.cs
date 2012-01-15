@@ -23,7 +23,7 @@ namespace RealityPacman
         private void acceptButton_Click(object sender, RoutedEventArgs e)
         {
             App.Settings.IsDisclaimerAccepted = true;
-            NavigationService.Navigate(new Uri("/PermissionsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Ui/PermissionsPage.xaml", UriKind.Relative));
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)

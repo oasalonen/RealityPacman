@@ -36,20 +36,20 @@ namespace RealityPacman
                 {
                     case GeoPositionStatus.Disabled:
                         gpsStatusLabel.Text = "Please enable positioning on this device";
-                        sprite.Source = new BitmapImage(new Uri("satellite-disabled.png", UriKind.RelativeOrAbsolute));
+                        sprite.Source = new BitmapImage(new Uri("/RealityPacman;component/Images/satellite-disabled.png", UriKind.RelativeOrAbsolute));
                         _frameCount = 0;
                         _animationTimer.Stop();
                         break;
                     case GeoPositionStatus.Initializing:
                     case GeoPositionStatus.NoData:
                         gpsStatusLabel.Text = "Looking for your position";
-                        sprite.Source = new BitmapImage(new Uri("satellite-sprite.png", UriKind.RelativeOrAbsolute));
+                        sprite.Source = new BitmapImage(new Uri("/RealityPacman;component/Images/satellite-sprite.png", UriKind.RelativeOrAbsolute));
                         _frameCount = 11;
                         _animationTimer.Start();
                         break;
                     case GeoPositionStatus.Ready:
                         gpsStatusLabel.Text = "Position acquired";
-                        sprite.Source = new BitmapImage(new Uri("satellite-ready.png", UriKind.RelativeOrAbsolute));
+                        sprite.Source = new BitmapImage(new Uri("/RealityPacman;component/Images/satellite-ready.png", UriKind.RelativeOrAbsolute));
                         _frameCount = 0;
                         _animationTimer.Stop();
                         break;

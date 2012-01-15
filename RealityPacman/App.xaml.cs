@@ -139,15 +139,15 @@ namespace RealityPacman
             Uri uri;
             if (Settings.IsDisclaimerAccepted == false)
             {
-                uri = new Uri("/DisclaimerPage.xaml", UriKind.Relative);
+                uri = new Uri("/Ui/DisclaimerPage.xaml", UriKind.Relative);
             }
             else if (Settings.IsPermissionPageShown == false)
             {
-                uri = new Uri("/PermissionsPage.xaml", UriKind.Relative);
+                uri = new Uri("/Ui/PermissionsPage.xaml", UriKind.Relative);
             }
             else
             {
-                uri = new Uri("/StartPage.xaml", UriKind.Relative);
+                uri = new Uri("/Ui/StartPage.xaml", UriKind.Relative);
             }
             ((App)Application.Current).RootFrame.Navigate(uri);
         }

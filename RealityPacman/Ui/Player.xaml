@@ -14,7 +14,7 @@
         <Canvas.Clip>
             <RectangleGeometry Rect="0,0,64,64"/>
         </Canvas.Clip>
-        <Image x:Name="sprite" Canvas.Left="0" Source="/RealityPacman;component/position_indicator.png" />
+        <Image x:Name="sprite" Canvas.Left="0" Source="/RealityPacman;component/Images/position_indicator.png" />
         <Canvas.RenderTransform>
             <RotateTransform x:Name="pacmanRotation" CenterX="32" CenterY="32" />
         </Canvas.RenderTransform>

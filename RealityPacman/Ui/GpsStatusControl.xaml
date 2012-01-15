@@ -27,7 +27,7 @@
             <Canvas.Clip>
                 <RectangleGeometry Rect="0,0,63,63" />
             </Canvas.Clip>
-            <Image x:Name="sprite" Source="/RealityPacman;component/satellite-sprite.png" />
+            <Image x:Name="sprite" Source="/RealityPacman;component/Images/satellite-sprite.png" />
         </Canvas>
         <TextBlock x:Name="gpsStatusLabel"
                    Grid.Row="0"

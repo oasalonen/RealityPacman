@@ -271,11 +271,11 @@ namespace RealityPacman
         {
             if (gpsStatusBox.Status == GeoPositionStatus.Disabled)
             {
-                NavigationService.Navigate(new Uri("/GpsHelpPage.xaml?helpTopic=disabledPositioning", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Ui/GpsHelpPage.xaml?helpTopic=disabledPositioning", UriKind.Relative));
             }
             else if (gpsStatusBox.Status == GeoPositionStatus.NoData)
             {
-                NavigationService.Navigate(new Uri("/GpsHelpPage.xaml?helpTopic=noPosition", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Ui/GpsHelpPage.xaml?helpTopic=noPosition", UriKind.Relative));
             }
         }
     }

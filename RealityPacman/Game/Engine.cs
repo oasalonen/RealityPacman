@@ -123,8 +123,11 @@ namespace RealityPacman.Game
 
         public void Stop()
         {
-            Session.Stop();
-            _gameTimer.Stop();
+            if (Session != null && _gameTimer != null)
+            {
+                Session.Stop();
+                _gameTimer.Stop();
+            }
         }
 
         public void _gameTimer_Tick(Object sender, EventArgs e)

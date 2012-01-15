@@ -16,6 +16,6 @@
         <Canvas.Clip>
             <RectangleGeometry Rect="0,0,40,40" />
         </Canvas.Clip>
-        <Image x:Name="image" Source="fruit.png" />
+        <Image x:Name="image" Source="/RealityPacman;component/Images/fruit.png" />
     </Canvas>
 </UserControl>
