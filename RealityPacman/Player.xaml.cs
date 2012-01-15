@@ -13,13 +13,13 @@ using System.Windows.Threading;
 
 namespace RealityPacman
 {
-    public partial class PacMan : UserControl
+    public partial class Player : UserControl
     {
         private DispatcherTimer animTimer;
         private int frame = 0;
         private int delta = 1;
 
-        public PacMan()
+        public Player()
         {
             InitializeComponent();
 #if false // Disable animation, indicator is no longer a sprite

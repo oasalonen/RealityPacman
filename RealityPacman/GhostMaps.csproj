@@ -120,8 +120,8 @@
     <Compile Include="NewGamePage.xaml.cs">
       <DependentUpon>NewGamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PacMan.xaml.cs">
-      <DependentUpon>PacMan.xaml</DependentUpon>
+    <Compile Include="Player.xaml.cs">
+      <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game\Player.cs" />
     <Compile Include="PermissionsPage.xaml.cs">
@@ -202,7 +202,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PacMan.xaml">
+    <Page Include="Player.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
