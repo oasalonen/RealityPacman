@@ -20,7 +20,7 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>RealityPacman.xap</XapFilename>
+    <XapFilename>GhostMaps.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>RealityPacman.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
@@ -237,14 +237,28 @@
     <None Include="Service References\Routing\route.wsdl" />
     <None Include="Service References\Routing\route.xsd" />
     <None Include="Service References\Routing\service.xsd" />
-    <Resource Include="ghost_anim_row-01.png" />
-    <Resource Include="eyes.png" />
-    <Resource Include="ghost_background.png" />
+    <Resource Include="ghost_anim_row-01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="eyes.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ghost_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="fruit.png" />
-    <Resource Include="satellite-sprite.png" />
-    <Resource Include="satellite-disabled.png" />
-    <Resource Include="satellite-ready.png" />
-    <Resource Include="position_indicator.png" />
+    <Resource Include="satellite-sprite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="satellite-disabled.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="satellite-ready.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="position_indicator.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
@@ -254,14 +268,18 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="ghost_anim_12.png" />
+    <Resource Include="ghost_anim_12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <None Include="Service References\Routing\configuration91.svcinfo" />
     <None Include="Service References\Routing\configuration.svcinfo" />
     <None Include="Service References\Routing\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="SplashScreenImage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
