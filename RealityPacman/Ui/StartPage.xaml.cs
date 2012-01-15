@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Data;
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public partial class StartPage : PhoneApplicationPage
     {

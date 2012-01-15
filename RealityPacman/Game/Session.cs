@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Device.Location;
 
-namespace RealityPacman.Game
+namespace GhostMaps.Game
 {
     public class Session
     {

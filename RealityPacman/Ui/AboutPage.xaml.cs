@@ -13,7 +13,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Info;
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public partial class AboutPage : PhoneApplicationPage
     {

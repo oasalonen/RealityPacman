@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using RealityPacman.Models;
+using GhostMaps.Models;
 
-namespace RealityPacman.ViewModels
+namespace GhostMaps.ViewModels
 {
     public class SessionViewModel : INotifyPropertyChanged, IDisposable
     {

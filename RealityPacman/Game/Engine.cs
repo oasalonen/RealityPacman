@@ -12,7 +12,7 @@ using System.Windows.Threading;
 using System.Collections.Generic;
 using System.Device.Location;
 
-namespace RealityPacman.Game
+namespace GhostMaps.Game
 {
     public class Engine
     {

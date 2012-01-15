@@ -11,7 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public partial class Player : UserControl
     {

@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RealityPacman</RootNamespace>
-    <AssemblyName>RealityPacman</AssemblyName>
+    <RootNamespace>GhostMaps</RootNamespace>
+    <AssemblyName>GhostMaps</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
@@ -22,7 +22,7 @@
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>GhostMaps.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>RealityPacman.App</SilverlightAppEntry>
+    <SilverlightAppEntry>GhostMaps.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
   </PropertyGroup>
@@ -228,10 +228,10 @@
     <None Include="Service References\Routing\common.xsd" />
     <None Include="Service References\Routing\contracts.wsdl" />
     <None Include="Service References\Routing\contracts.xsd" />
-    <None Include="Service References\Routing\RealityPacman.Routing.MajorRoutesResponse.datasource">
+    <None Include="Service References\Routing\GhostMaps.Routing.MajorRoutesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Routing\RealityPacman.Routing.RouteResponse.datasource">
+    <None Include="Service References\Routing\GhostMaps.Routing.RouteResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\Routing\route.wsdl" />

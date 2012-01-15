@@ -12,10 +12,10 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Maps;
 using System.Device.Location;
-using RealityPacman.Game;
+using GhostMaps.Game;
 using Microsoft.Devices.Sensors;
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public partial class MainPage : PhoneApplicationPage
     {

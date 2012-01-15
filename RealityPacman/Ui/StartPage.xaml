@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="RealityPacman.StartPage"
+    x:Class="GhostMaps.StartPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:uc="clr-namespace:RealityPacman"
+    xmlns:uc="clr-namespace:GhostMaps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -21,7 +21,7 @@
         <!--Panorama control-->
         <controls:Panorama Title="Ghost maps" x:Name="panorama" SelectionChanged="panorama_SelectionChanged">
             <controls:Panorama.Background>
-                <ImageBrush Stretch="UniformToFill" ImageSource="/RealityPacman;component/Images/ghost_background.png"/>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/GhostMaps;component/Images/ghost_background.png"/>
             </controls:Panorama.Background>
             
             <!--Main menu panorama item-->

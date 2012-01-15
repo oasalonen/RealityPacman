@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 using System.Device.Location;
 using System.ComponentModel;
 
-namespace RealityPacman.Game
+namespace GhostMaps.Game
 {
     public class WorldObject : INotifyPropertyChanged
     {

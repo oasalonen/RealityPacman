@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 using System.Collections.Generic;
 using Microsoft.Devices;
 
-namespace RealityPacman.Game
+namespace GhostMaps.Game
 {
     public class ProximitySensor
     {

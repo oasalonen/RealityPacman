@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RealityPacman.GpsStatusControl"
+﻿<UserControl x:Class="GhostMaps.GpsStatusControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -27,7 +27,7 @@
             <Canvas.Clip>
                 <RectangleGeometry Rect="0,0,63,63" />
             </Canvas.Clip>
-            <Image x:Name="sprite" Source="/RealityPacman;component/Images/satellite-sprite.png" />
+            <Image x:Name="sprite" Source="/GhostMaps;component/Images/satellite-sprite.png" />
         </Canvas>
         <TextBlock x:Name="gpsStatusLabel"
                    Grid.Row="0"

@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 using System.IO.IsolatedStorage;
 using System.ComponentModel;
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public class AppSettings : INotifyPropertyChanged
     {

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RealityPacman.MapItemControl"
+﻿<UserControl x:Class="GhostMaps.MapItemControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,6 +16,6 @@
         <Canvas.Clip>
             <RectangleGeometry Rect="0,0,40,40" />
         </Canvas.Clip>
-        <Image x:Name="image" Source="/RealityPacman;component/Images/fruit.png" />
+        <Image x:Name="image" Source="/GhostMaps;component/Images/fruit.png" />
     </Canvas>
 </UserControl>

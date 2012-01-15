@@ -10,12 +10,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Device.Location;
 using System.ComponentModel;
-using RealityPacman.Routing;
+using GhostMaps.Routing;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Controls.Maps;
 using Microsoft.Phone.Controls.Maps.Platform;
 
-namespace RealityPacman.Game
+namespace GhostMaps.Game
 {
     public class Ghost : WorldObject
     {

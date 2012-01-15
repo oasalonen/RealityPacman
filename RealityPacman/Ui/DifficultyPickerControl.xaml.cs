@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public partial class DifficultyPickerControl : UserControl
     {

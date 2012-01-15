@@ -4,7 +4,7 @@ using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using Microsoft.Phone.Data.Linq;
 
-namespace RealityPacman.Models
+namespace GhostMaps.Models
 {
     [Table]
     public class SessionModel : INotifyPropertyChanged, INotifyPropertyChanging

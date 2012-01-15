@@ -12,11 +12,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using RealityPacman.Models;
-using RealityPacman.ViewModels;
+using GhostMaps.Models;
+using GhostMaps.ViewModels;
 
 
-namespace RealityPacman
+namespace GhostMaps
 {
     public partial class App : Application
     {
