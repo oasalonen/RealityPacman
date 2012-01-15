@@ -21,7 +21,7 @@ namespace RealityPacman
     {
         Engine _engine;
         private GeoCoordinateWatcher _watcher;
-        private Compass _compass; 
+        private Compass _compass;
 
         // Constructor
         public MainPage()
@@ -259,8 +259,7 @@ namespace RealityPacman
         {
             base.OnNavigatedTo(e);
 
-            // Only start a new game if pushing this page for the first time
-            if (e.NavigationMode == System.Windows.Navigation.NavigationMode.New)
+            //if (e.NavigationMode == System.Windows.Navigation.NavigationMode.New)
             {
                 int difficultyInt = Int32.Parse(NavigationContext.QueryString["difficulty"]);
                 _engine.Difficulty = (Difficulty)difficultyInt;
